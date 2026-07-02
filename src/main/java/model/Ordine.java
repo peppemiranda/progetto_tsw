@@ -61,4 +61,11 @@ public class Ordine {
     public void setTotaleOrdine(double totaleOrdine) {
         this.totaleOrdine = totaleOrdine;
     }
+    
+    
+    //Metodo toString (Per il debug)
+    public String toString() {
+        return "Ordine [idOrdine=" + idOrdine + ", idUtente=" + idUtente 
+                + ", dataAcquisto=" + dataAcquisto + ", totaleOrdine=" + totaleOrdine + "]";
+    }
 }
