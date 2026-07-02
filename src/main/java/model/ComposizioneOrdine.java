@@ -58,4 +58,11 @@ public class ComposizioneOrdine {
     public void setQuantitaScelta(int quantitaScelta) {
         this.quantitaScelta = quantitaScelta;
     }
+    
+    
+    //Metodo toString(Per il debug)
+    public String toString() {
+        return "ComposizioneOrdine [idOrdine=" + idOrdine + ", idScarpa=" + idScarpa 
+                + ", prezzoAcquisto=" + prezzoAcquisto + ", quantitaScelta=" + quantitaScelta + "]";
+    }
 }
