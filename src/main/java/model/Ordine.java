@@ -20,4 +20,45 @@ public class Ordine {
         this.dataAcquisto = dataAcquisto;
         this.totaleOrdine = totaleOrdine;
     }
+    
+    
+    //Metodi Get e Set
+   
+    public int getIdOrdine() {
+        return idOrdine;
+    }
+
+    public void setIdOrdine(int idOrdine) {
+        this.idOrdine = idOrdine;
+    }
+
+    
+    
+    public int getIdUtente() {
+        return idUtente;
+    }
+
+    public void setIdUtente(int idUtente) {
+        this.idUtente = idUtente;
+    }
+
+    
+    
+    public Date getDataAcquisto() {
+        return dataAcquisto;
+    }
+
+    public void setDataAcquisto(Date dataAcquisto) {
+        this.dataAcquisto = dataAcquisto;
+    }
+
+    
+    
+    public double getTotaleOrdine() {
+        return totaleOrdine;
+    }
+
+    public void setTotaleOrdine(double totaleOrdine) {
+        this.totaleOrdine = totaleOrdine;
+    }
 }
