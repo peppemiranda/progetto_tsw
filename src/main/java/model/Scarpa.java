@@ -81,4 +81,11 @@ public class Scarpa {
     public void setPezziMagazzino(int pezziMagazzino) {
         this.pezziMagazzino = pezziMagazzino;
     }
+    
+    //Metodo toString (per il Debug)
+    public String toString() {
+        return "Scarpa [idScarpa=" + idScarpa + ", marca=" + marca + ", modello=" + modello 
+                + ", terreno=" + terreno + ", prezzoAttuale=" + prezzoAttuale 
+                + ", pezziMagazzino=" + pezziMagazzino + "]";
+    }
 }
