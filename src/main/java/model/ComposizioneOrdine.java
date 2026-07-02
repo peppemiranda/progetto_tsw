@@ -18,4 +18,44 @@ public class ComposizioneOrdine {
         this.prezzoAcquisto = prezzoAcquisto;
         this.quantitaScelta = quantitaScelta;
     }
+    
+    //Metodi Get e Set
+    
+    public int getIdOrdine() {
+        return idOrdine;
+    }
+
+    public void setIdOrdine(int idOrdine) {
+        this.idOrdine = idOrdine;
+    }
+
+    
+    
+    public int getIdScarpa() {
+        return idScarpa;
+    }
+
+    public void setIdScarpa(int idScarpa) {
+        this.idScarpa = idScarpa;
+    }
+
+    
+    
+    public double getPrezzoAcquisto() {
+        return prezzoAcquisto;
+    }
+
+    public void setPrezzoAcquisto(double prezzoAcquisto) {
+        this.prezzoAcquisto = prezzoAcquisto;
+    }
+
+    
+    
+    public int getQuantitaScelta() {
+        return quantitaScelta;
+    }
+
+    public void setQuantitaScelta(int quantitaScelta) {
+        this.quantitaScelta = quantitaScelta;
+    }
 }
