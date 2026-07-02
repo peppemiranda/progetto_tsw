@@ -96,4 +96,11 @@ public UtenteRegistrato(int idUtente, String nome, String cognome, String email,
 	public void setIndirizzoSpedizione(String indirizzoSpedizione) {
 		this.indirizzoSpedizione = indirizzoSpedizione;
 		}
+	
+	//Metodo toString(Utile per il debug in console)
+	public String toString() {
+        return "UtenteRegistrato [idUtente=" + idUtente + ", nome=" + nome + ", cognome=" + cognome 
+                + ", email=" + email + ", passwordHash=" + passwordHash + ", ruolo=" + ruolo 
+                + ", indirizzoSpedizione=" + indirizzoSpedizione + "]";
+    }
 }
