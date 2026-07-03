@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 public class UtenteRegistratoDAODataSource implements UtenteRegistratoDAO {
 	
+	@Override
 	public void doSave(UtenteRegistrato utente) throws SQLException {
 		
         // Query SQL parametrizzata per evitare SQL Injection
