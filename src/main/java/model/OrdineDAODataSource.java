@@ -9,5 +9,29 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 public class OrdineDAODataSource implements OrdineDAO {
+	
+	@Override
+    public void doSave(Ordine ordine) throws SQLException {
+		
+        // Non inseriamo Data_Acquisto perché MySQL lo fa in automatico con CURRENT_TIMESTAMP
+        String query = "INSERT INTO Ordine (ID_Utente, Totale_Ordine) VALUES (?, ?)";
+
+        // Usiamo Statement.RETURN_GENERATED_KEYS per farci restituire l'ID appena creato
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+            
+            ps.setInt(1, ordine.getIdUtente());
+            ps.setDouble(2, ordine.getTotaleOrdine());
+            
+            ps.executeUpdate();
+            
+            // Recuperiamo l'ID generato automaticamente da MySQL e lo mettiamo nel nostro oggetto Java
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    ordine.setIdOrdine(rs.getInt(1)); // 1 è la prima (e unica) colonna restituita, ovvero l'ID
+                }
+            }
+        }
+    }
 
 }
