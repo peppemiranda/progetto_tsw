@@ -25,4 +25,31 @@ public class UtenteRegistratoDAODataSource implements UtenteRegistratoDAO {
             ps.executeUpdate();
         }
     }
+	
+	@Override
+    public UtenteRegistrato doRetrieveByEmailAndPassword(String email, String password) throws SQLException {
+        String query = "SELECT * FROM Utente_Registrato WHERE Email = ? AND PasswordHash = ?";
+        UtenteRegistrato utente = null;
+        
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+            
+            ps.setString(1, email);
+            ps.setString(2, password);
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    utente = new UtenteRegistrato();
+                    utente.setIdUtente(rs.getInt("ID_Utente"));
+                    utente.setNome(rs.getString("Nome"));
+                    utente.setCognome(rs.getString("Cognome"));
+                    utente.setEmail(rs.getString("Email"));
+                    utente.setPasswordHash(rs.getString("PasswordHash"));
+                    utente.setRuolo(rs.getString("Ruolo"));
+                    utente.setIndirizzoSpedizione(rs.getString("Indirizzo_Spedizione"));
+                }
+            }
+        }
+        return utente;
+    }
 }
