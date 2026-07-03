@@ -26,4 +26,30 @@ public class ComposizioneOrdineDAODataSource implements ComposizioneOrdineDAO {
             ps.executeUpdate();
         }
     }
+	
+	
+	@Override
+    public Collection<ComposizioneOrdine> doRetrieveByOrdine(int idOrdine) throws SQLException {
+        String query = "SELECT * FROM Composizione_Ordine WHERE ID_Ordine = ?";
+        Collection<ComposizioneOrdine> composizioni = new LinkedList<>();
+
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+            
+            ps.setInt(1, idOrdine);
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    ComposizioneOrdine comp = new ComposizioneOrdine();
+                    comp.setIdOrdine(rs.getInt("ID_Ordine"));
+                    comp.setIdScarpa(rs.getInt("ID_Scarpa"));
+                    comp.setPrezzoAcquisto(rs.getDouble("Prezzo_Acquisto"));
+                    comp.setQuantitaScelta(rs.getInt("Quantita_Scelta"));
+                    
+                    composizioni.add(comp);
+                }
+            }
+        }
+        return composizioni;
+    }
 }
