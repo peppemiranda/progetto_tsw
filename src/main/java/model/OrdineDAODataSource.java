@@ -33,5 +33,30 @@ public class OrdineDAODataSource implements OrdineDAO {
             }
         }
     }
+	
+	@Override
+    public Collection<Ordine> doRetrieveByUtente(int idUtente) throws SQLException {
+        String query = "SELECT * FROM Ordine WHERE ID_Utente = ?";
+        Collection<Ordine> storicoOrdini = new LinkedList<>();
+
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+            
+            ps.setInt(1, idUtente);
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Ordine ordine = new Ordine();
+                    ordine.setIdOrdine(rs.getInt("ID_Ordine"));
+                    ordine.setIdUtente(rs.getInt("ID_Utente"));
+                    ordine.setDataAcquisto(rs.getDate("Data_Acquisto"));
+                    ordine.setTotaleOrdine(rs.getDouble("Totale_Ordine"));
+                    
+                    storicoOrdini.add(ordine);
+                }
+            }
+        }
+        return storicoOrdini;
+    }
 
 }
