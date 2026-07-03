@@ -26,6 +26,6 @@ public class ConPool {
                 throw new SQLException("Errore fatale: impossibile caricare il Connection Pool dal context.xml", e);
             }
         }
-        return datasource.getConnection();
+        return datasource.getConnection();		//Restituiamo fisicamente la connessione aperta
     }
 }
