@@ -9,5 +9,5 @@
               username="peppe" 
               password="Giuseppe05_" 
               driverClassName="com.mysql.cj.jdbc.Driver" 
-              url="jdbc:mysql://localhost:3306/pianetacalcio_db?serverTimezone=UTC"/>
+              url="jdbc:mysql://localhost:3306/pianetacalcio?serverTimezone=UTC"/>
 </Context>
