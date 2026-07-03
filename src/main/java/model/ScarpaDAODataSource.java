@@ -33,5 +33,30 @@ public class ScarpaDAODataSource implements ScarpaDAO {
         }
         return scarpa;
     }
+	
+	
+	@Override
+    public Collection<Scarpa> doRetrieveAll() throws SQLException {
+        String query = "SELECT * FROM Scarpa";
+        Collection<Scarpa> catalogo = new LinkedList<>();
+
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query);
+             ResultSet rs = ps.executeQuery()) {
+            
+            while (rs.next()) {
+                Scarpa scarpa = new Scarpa();
+                scarpa.setIdScarpa(rs.getInt("ID_Scarpa"));
+                scarpa.setMarca(rs.getString("Marca"));
+                scarpa.setModello(rs.getString("Modello"));
+                scarpa.setTerreno(rs.getString("Terreno"));
+                scarpa.setPrezzoAttuale(rs.getDouble("Prezzo_Attuale"));
+                scarpa.setPezziMagazzino(rs.getInt("Pezzi_Magazzino"));
+                
+                catalogo.add(scarpa); // Aggiunge la scarpa alla lista del catalogo
+            }
+        }
+        return catalogo;
+    }
 
 }
