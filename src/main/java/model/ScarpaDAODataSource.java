@@ -8,5 +8,30 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 public class ScarpaDAODataSource implements ScarpaDAO {
+	
+	@Override
+    public Scarpa doRetrieveByKey(int idScarpa) throws SQLException {
+        String query = "SELECT * FROM Scarpa WHERE ID_Scarpa = ?";
+        Scarpa scarpa = null;
+
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+            
+            ps.setInt(1, idScarpa);
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    scarpa = new Scarpa();
+                    scarpa.setIdScarpa(rs.getInt("ID_Scarpa"));
+                    scarpa.setMarca(rs.getString("Marca"));
+                    scarpa.setModello(rs.getString("Modello"));
+                    scarpa.setTerreno(rs.getString("Terreno"));
+                    scarpa.setPrezzoAttuale(rs.getDouble("Prezzo_Attuale"));
+                    scarpa.setPezziMagazzino(rs.getInt("Pezzi_Magazzino"));
+                }
+            }
+        }
+        return scarpa;
+    }
 
 }
