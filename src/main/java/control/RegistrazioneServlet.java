@@ -35,6 +35,13 @@ public class RegistrazioneServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// Recuperiamo i dati inseriti dall'utente nel form HTML
+		
+        String nome = request.getParameter("nome");
+        String cognome = request.getParameter("cognome");
+        String email = request.getParameter("email");
+        String passwordInChiaro = request.getParameter("password");
+        String indirizzo = request.getParameter("indirizzo");
 	}
 
 }
