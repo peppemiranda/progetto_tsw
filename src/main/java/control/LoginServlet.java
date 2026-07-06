@@ -41,6 +41,35 @@ public class LoginServlet extends HttpServlet {
         
         // Crittografiamo la password
         String passwordHash = util.PasswordHasher.hashPassword(passwordInChiaro);
+        
+        
+        
+        // Chiamiamo il DAO per interrogare MySQL
+        model.UtenteRegistratoDAODataSource dao = new model.UtenteRegistratoDAODataSource();
+        
+        try {
+            // Chiediamo al DAO di cercare nel DB un utente con questa email e questa password(crittografata)
+            model.UtenteRegistrato utente = dao.doRetrieveByEmailAndPassword(email, passwordHash);
+            
+            if (utente != null) {	//Controlliamo se l'utente esiste
+            	
+            	//Se esiste, creiamo all'utente la sessione
+                request.getSession().setAttribute("utenteLoggato", utente);
+                
+                //Lo mandiamo alla home page del sito
+                response.sendRedirect("index.jsp"); 
+                
+            } else {	//L'utente NON esiste
+
+            	//Quindi(è null) o l'email o la password è sbagliata. Rimandiamo l'utente alla pagina di login,
+            	//aggiungendo un segnale di errore nell'URL
+                response.sendRedirect("login.jsp?errore=true");
+            }
+            
+        } catch (java.sql.SQLException e) {
+            e.printStackTrace(); 	// Errore interno del database
+            response.sendRedirect("errore.jsp");
+        }
 	}
 
 }
