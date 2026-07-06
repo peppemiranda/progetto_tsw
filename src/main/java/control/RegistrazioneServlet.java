@@ -42,6 +42,10 @@ public class RegistrazioneServlet extends HttpServlet {
         String email = request.getParameter("email");
         String passwordInChiaro = request.getParameter("password");
         String indirizzo = request.getParameter("indirizzo");
+        
+        
+        // Sicurezza: Crittografiamo la password
+        String passwordHash = util.PasswordHasher.hashPassword(passwordInChiaro);
 	}
 
 }
