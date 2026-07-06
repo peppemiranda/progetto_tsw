@@ -46,6 +46,17 @@ public class RegistrazioneServlet extends HttpServlet {
         
         // Sicurezza: Crittografiamo la password
         String passwordHash = util.PasswordHasher.hashPassword(passwordInChiaro);
+        
+        
+        // Riempiamo l'oggetto con i dati e la password sicura
+        
+        model.UtenteRegistrato nuovoUtente = new model.UtenteRegistrato();
+        nuovoUtente.setNome(nome);
+        nuovoUtente.setCognome(cognome);
+        nuovoUtente.setEmail(email);
+        nuovoUtente.setPasswordHash(passwordHash);
+        nuovoUtente.setRuolo("Cliente"); 	// Di default chi si registra è un utente standard
+        nuovoUtente.setIndirizzoSpedizione(indirizzo);
 	}
 
 }
