@@ -38,6 +38,9 @@ public class LoginServlet extends HttpServlet {
 		// Apriamo il "pacco" arrivato da Internet
         String email = request.getParameter("email");
         String passwordInChiaro = request.getParameter("password");
+        
+        // Crittografiamo la password
+        String passwordHash = util.PasswordHasher.hashPassword(passwordInChiaro);
 	}
 
 }
