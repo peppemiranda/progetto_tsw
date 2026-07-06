@@ -57,6 +57,22 @@ public class RegistrazioneServlet extends HttpServlet {
         nuovoUtente.setPasswordHash(passwordHash);
         nuovoUtente.setRuolo("Cliente"); 	// Di default chi si registra è un utente standard
         nuovoUtente.setIndirizzoSpedizione(indirizzo);
+        
+        
+        // Consegniamo i dati al DAO per salvare ciò fisicamente nel database
+        
+        model.UtenteRegistratoDAODataSource dao = new model.UtenteRegistratoDAODataSource();
+        try {
+            dao.doSave(nuovoUtente);
+            
+            // Se il database salva tutto correttamente, reindirizziamo l'utente alla pagina di login
+            response.sendRedirect("login.jsp"); 
+            
+        } catch (java.sql.SQLException e) {
+            e.printStackTrace(); 	// In caso di errore nel DB, stampiamo il problema nella console
+            response.sendRedirect("errore.jsp"); 	// E deviamo l'utente su una pagina di errore
+        }
+        
 	}
 
 }
