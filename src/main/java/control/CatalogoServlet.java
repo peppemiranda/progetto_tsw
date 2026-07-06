@@ -29,6 +29,24 @@ public class CatalogoServlet extends HttpServlet {
 		
 		// Chiamiamo il DAO, per le scarpe
         model.ScarpaDAODataSource dao = new model.ScarpaDAODataSource();
+        
+       
+        try {
+        	
+     // Ordiniamo al DAO di estrarre TUTTO il catalogo da MySQL (usiamo la Collection, il metodo della classe ScarpaDAODataSource)
+            java.util.Collection<model.Scarpa> catalogo = dao.doRetrieveAll();
+
+            // Attacchiamo il catalogo alla richiesta(request) per farlo viaggiare verso la pagina web
+            request.setAttribute("listaScarpe", catalogo);
+
+            // Con RequestDispatcher passiamo tutto alla pagina HTML/JSP.
+            jakarta.servlet.RequestDispatcher dispatcher = request.getRequestDispatcher("catalogo.jsp");
+            dispatcher.forward(request, response);
+
+        } catch (java.sql.SQLException e) {
+            e.printStackTrace(); 	//Errore di connessione
+            response.sendRedirect("errore.jsp");
+        }
 	}
 
 	/**
