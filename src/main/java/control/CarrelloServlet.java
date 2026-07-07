@@ -81,6 +81,10 @@ public class CarrelloServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
+        
+        //Rimandiamo l'utente alla pagina del carrello.
+        //Usiamo sendRedirect(e non RequestDispatcher) perchè il carrello è nella sessione, quindi la pagina lo troverà da sola
+        response.sendRedirect("carrello.jsp");
 	}
 
 	/**
