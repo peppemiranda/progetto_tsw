@@ -39,6 +39,16 @@ public class CheckoutServlet extends HttpServlet {
             response.sendRedirect("login.jsp");
             return; //Ferma l'esecuzione del codice
         }
+        
+        //Estraiamo il carrello dalla sessione
+        //Infatti ci prendiamo "carrello" dalla Servlet CarrelloServlet(dovè lì abbiamo fatto session.setAttribute)
+        java.util.ArrayList<model.Scarpa> carrello = (java.util.ArrayList<model.Scarpa>) session.getAttribute("carrello");
+        
+        // Se il carrello non esiste o è vuoto, rimandiamo l'utente al catalogo
+        if (carrello == null || carrello.isEmpty()) {
+            response.sendRedirect("catalogo.jsp");
+            return;
+        }
 	}
 
 	/**
