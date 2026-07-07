@@ -49,6 +49,13 @@ public class CheckoutServlet extends HttpServlet {
             response.sendRedirect("catalogo.jsp");
             return;
         }
+        
+        try {
+            //Calcoliamo il totale da pagare scorrendo tutte le scarpe nel carrello
+            double totale = 0;
+            for (model.Scarpa scarpa : carrello) {
+                totale += scarpa.getPrezzoAttuale();
+            }
 	}
 
 	/**
