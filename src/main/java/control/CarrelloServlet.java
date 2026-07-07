@@ -26,8 +26,9 @@ public class CarrelloServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		//Recuperiamo la Sessione dell'utente. Se la sessione esiste ci viene restituita, altrimenti se ne crea una nuova
+        jakarta.servlet.http.HttpSession session = request.getSession();
 	}
 
 	/**
