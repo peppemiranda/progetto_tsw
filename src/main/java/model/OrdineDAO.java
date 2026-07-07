@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.SQLException;
+
 import java.util.Collection;
 
 public interface OrdineDAO {
@@ -10,4 +11,7 @@ public interface OrdineDAO {
     
     // Recupera tutto lo storico ordini di un singolo utente
     Collection<Ordine> doRetrieveByUtente(int idUtente) throws SQLException;
+    
+    // Per leggere i nuovi ordini
+    public Collection<Ordine> doRetrieveAll() throws SQLException;
 }
