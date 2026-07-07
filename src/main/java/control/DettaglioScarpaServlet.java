@@ -29,6 +29,9 @@ public class DettaglioScarpaServlet extends HttpServlet {
 		
 		// Leggiamo l'ID della scarpa dall'URL
         String idStringa = request.getParameter("id");
+        
+        // Controllo di sicurezza: verifichiamo che l'ID esista e non sia vuoto
+        if (idStringa != null && !idStringa.isEmpty()) {
 	}
 
 	/**
