@@ -29,6 +29,9 @@ public class CheckoutServlet extends HttpServlet {
 		
 		//Prendiamo la sessione
         jakarta.servlet.http.HttpSession session = request.getSession();
+        
+        //Estraiamo l'utente loggato(dalla sessione), per vedere CHI sta comprando
+        model.UtenteRegistrato utente = (model.UtenteRegistrato) session.getAttribute("utenteLoggato");
 	}
 
 	/**
