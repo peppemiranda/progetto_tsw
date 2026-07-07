@@ -41,6 +41,21 @@ public class CarrelloServlet extends HttpServlet {
         
         //Leggiamo dall'URL cosa vuole fare l'utente
         String azione = request.getParameter("azione");
+        
+        if (azione != null) {
+            try {
+                if (azione.equals("aggiungi")) {	//L'utente vuole inserire una scarpa
+                    
+                    int idScarpa = Integer.parseInt(request.getParameter("id"));
+                    
+                    // Chiamiamo il DAO per prendere i dati della scarpa (marca, prezzo) dal database
+                    model.ScarpaDAODataSource dao = new model.ScarpaDAODataSource();
+                    model.Scarpa scarpaDaAggiungere = dao.doRetrieveByKey(idScarpa);
+                    
+                    if (scarpaDaAggiungere != null) {
+                        carrello.add(scarpaDaAggiungere); 	//Mettiamo nel carrello la scarpa
+                    }
+                }
 	}
 
 	/**
