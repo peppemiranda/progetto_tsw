@@ -70,6 +70,11 @@ public class CarrelloServlet extends HttpServlet {
                         }
                     }
                 }
+                
+                else if (azione.equals("svuota")) {		//L'utente vuole svuotare tutto in un colpo solo
+                    carrello.clear();
+                }
+            }
 	}
 
 	/**
