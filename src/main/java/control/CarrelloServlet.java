@@ -36,32 +36,33 @@ public class CarrelloServlet extends HttpServlet {
         java.util.ArrayList<model.Scarpa> carrello = (java.util.ArrayList<model.Scarpa>) session.getAttribute("carrello");
         if (carrello == null) {
             carrello = new java.util.ArrayList<>();
-            session.setAttribute("carrello", carrello); // Lo appiccichiamo alla sessione
+            session.setAttribute("carrello", carrello); 	//Lo appiccichiamo alla sessione
         }
-        
+
         //Leggiamo dall'URL cosa vuole fare l'utente
         String azione = request.getParameter("azione");
-        
+
         if (azione != null) {
+        	
             try {
                 if (azione.equals("aggiungi")) {	//L'utente vuole inserire una scarpa
-                    
+                	
                     int idScarpa = Integer.parseInt(request.getParameter("id"));
                     
-                    // Chiamiamo il DAO per prendere i dati della scarpa (marca, prezzo) dal database
+                    //Chiamiamo il DAO per prendere i dati della scarpa (marca, prezzo) dal database
                     model.ScarpaDAODataSource dao = new model.ScarpaDAODataSource();
                     model.Scarpa scarpaDaAggiungere = dao.doRetrieveByKey(idScarpa);
                     
                     if (scarpaDaAggiungere != null) {
-                        carrello.add(scarpaDaAggiungere); 	//Mettiamo nel carrello la scarpa
+                        carrello.add(scarpaDaAggiungere);	//Mettiamo nel carrello la scarpa
                     }
-                }
+                } 
                 
                 else if (azione.equals("rimuovi")) {	//L'utente vuole togliere una scarpa
-                   
+
                     int idScarpa = Integer.parseInt(request.getParameter("id"));
                     
-                    // Cerchiamo la scarpa nel carrello e la eliminiamo
+                    //Cerchiamo la scarpa nel carrello e la eliminiamo
                     for (int i = 0; i < carrello.size(); i++) {
                         if (carrello.get(i).getIdScarpa() == idScarpa) {
                             carrello.remove(i);
@@ -74,9 +75,9 @@ public class CarrelloServlet extends HttpServlet {
                 else if (azione.equals("svuota")) {		//L'utente vuole svuotare tutto in un colpo solo
                     carrello.clear();
                 }
-            }	catch (NumberFormatException | java.sql.SQLException e) {
+            } catch (NumberFormatException | java.sql.SQLException e) {
             	
-                // Se toccando l'URL o il DB si ha un problema, intercettiamo l'errore senza far crashare nulla
+                //Se toccando l'URL o il DB si ha un problema, intercettiamo l'errore senza far crashare nulla
                 e.printStackTrace();
             }
         }
