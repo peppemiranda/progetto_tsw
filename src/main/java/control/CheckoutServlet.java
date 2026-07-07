@@ -51,7 +51,7 @@ public class CheckoutServlet extends HttpServlet {
         }
         
         try {
-            //Calcoliamo il totale da pagare scorrendo tutte le scarpe nel carrello
+            //Calcoliamo il totale da pagare scorrendo tutte le scarpe nel carrelloo
             double totale = 0;
             for (model.Scarpa scarpa : carrello) {
                 totale += scarpa.getPrezzoAttuale();
