@@ -29,6 +29,18 @@ public class CarrelloServlet extends HttpServlet {
 		
 		//Recuperiamo la Sessione dell'utente. Se la sessione esiste ci viene restituita, altrimenti se ne crea una nuova
         jakarta.servlet.http.HttpSession session = request.getSession();
+        
+        //Cerchiamo il carrello nella sessione.
+        // Usiamo una ArrayList di Java per contenere le scarpe scelte
+        
+        java.util.ArrayList<model.Scarpa> carrello = (java.util.ArrayList<model.Scarpa>) session.getAttribute("carrello");
+        if (carrello == null) {
+            carrello = new java.util.ArrayList<>();
+            session.setAttribute("carrello", carrello); // Lo appiccichiamo alla sessione
+        }
+        
+        //Leggiamo dall'URL cosa vuole fare l'utente
+        String azione = request.getParameter("azione");
 	}
 
 	/**
