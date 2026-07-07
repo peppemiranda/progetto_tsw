@@ -56,6 +56,20 @@ public class CarrelloServlet extends HttpServlet {
                         carrello.add(scarpaDaAggiungere); 	//Mettiamo nel carrello la scarpa
                     }
                 }
+                
+                else if (azione.equals("rimuovi")) {	//L'utente vuole togliere una scarpa
+                   
+                    int idScarpa = Integer.parseInt(request.getParameter("id"));
+                    
+                    // Cerchiamo la scarpa nel carrello e la eliminiamo
+                    for (int i = 0; i < carrello.size(); i++) {
+                        if (carrello.get(i).getIdScarpa() == idScarpa) {
+                            carrello.remove(i);
+                            break;	// Ci fermiamo appena viene tolta una scarpa, quindi se l'utente ne aveva aggiunte due uguali,
+                            		// l'altra rimane
+                        }
+                    }
+                }
 	}
 
 	/**
