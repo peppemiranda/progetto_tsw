@@ -69,6 +69,30 @@ public class CheckoutServlet extends HttpServlet {
 
             //Salviamo i dettagli, e chiamiamo il DAO per la composizione(ComposizioneOrdine, le singole scarpe)
             model.ComposizioneOrdineDAODataSource compDao = new model.ComposizioneOrdineDAODataSource();
+            
+            //Facciamo un ciclo: per ogni scarpa nel carrello, salviamo una riga nel database
+            for (model.Scarpa scarpa : carrello) {
+                model.ComposizioneOrdine dettaglio = new model.ComposizioneOrdine();
+                dettaglio.setIdOrdine(nuovoOrdine.getIdOrdine()); //Usiamo l'ID generato prima
+                dettaglio.setIdScarpa(scarpa.getIdScarpa());
+                dettaglio.setPrezzoAcquisto(scarpa.getPrezzoAttuale());
+                dettaglio.setQuantitaScelta(1); //Per semplicità ogni click nel carrello è 1 quantità
+                
+                compDao.doSave(dettaglio);
+            }
+ 
+            //Svuotiamo il carrello provvisorio
+            carrello.clear();
+            
+            //Mandiamo l'utente verso la pagina home
+            response.sendRedirect("index.jsp");
+
+        } catch (java.sql.SQLException e) {
+        	
+            // Se MySQL va in crash proprio mentre salva, intercettiamo
+            e.printStackTrace();
+            response.sendRedirect("errore.jsp");
+        }
 	}
 
 	/**
