@@ -74,7 +74,12 @@ public class CarrelloServlet extends HttpServlet {
                 else if (azione.equals("svuota")) {		//L'utente vuole svuotare tutto in un colpo solo
                     carrello.clear();
                 }
+            }	catch (NumberFormatException | java.sql.SQLException e) {
+            	
+                // Se toccando l'URL o il DB si ha un problema, intercettiamo l'errore senza far crashare nulla
+                e.printStackTrace();
             }
+        }
 	}
 
 	/**
