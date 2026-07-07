@@ -26,8 +26,18 @@ public class LogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		// Recuperiamo la sessione attuale dell'utente(se esiste). Se non esiste NON si crea nulla (false)
+        jakarta.servlet.http.HttpSession session = request.getSession(false);
+        
+        if (session != null) {
+        	
+        	//Questo comando chiude la sessione
+            session.invalidate();
+        }
+        
+        //Rispediamo l'utente alla home page del sito(come ospite anonimo)
+        response.sendRedirect("index.jsp");
 	}
 
 	/**
