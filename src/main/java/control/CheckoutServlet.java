@@ -63,6 +63,12 @@ public class CheckoutServlet extends HttpServlet {
             nuovoOrdine.setTotaleOrdine(totale);
             
             model.OrdineDAODataSource ordineDao = new model.OrdineDAODataSource();
+            
+            //Salviamo l'ordine, e MySQL mette automaticamente l'ID
+            ordineDao.doSave(nuovoOrdine); 
+
+            //Salviamo i dettagli, e chiamiamo il DAO per la composizione(ComposizioneOrdine, le singole scarpe)
+            model.ComposizioneOrdineDAODataSource compDao = new model.ComposizioneOrdineDAODataSource();
 	}
 
 	/**
