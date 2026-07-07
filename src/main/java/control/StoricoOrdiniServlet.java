@@ -30,6 +30,15 @@ public class StoricoOrdiniServlet extends HttpServlet {
 		//Prendiamo la sessione dell'utente
         jakarta.servlet.http.HttpSession session = request.getSession();
         model.UtenteRegistrato utente = (model.UtenteRegistrato) session.getAttribute("utenteLoggato");
+        
+        //Se l'utente NON è loggato, lo rispediamo alla pagina di login
+        if (utente == null) {
+            response.sendRedirect("login.jsp");
+            return;  //Fermiamo l'esecuzione
+        }
+
+        //Chiamiamo il DAO per gli Ordini
+        model.OrdineDAODataSource dao = new model.OrdineDAODataSource();
 	}
 
 	/**
