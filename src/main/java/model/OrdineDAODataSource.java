@@ -1,10 +1,12 @@
 package model;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement; 		//Per recuperare l'ID generato
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -57,6 +59,26 @@ public class OrdineDAODataSource implements OrdineDAO {
             }
         }
         return storicoOrdini;
+    }
+	
+	// Metodo aggiunto per estrarre tutti gli ordini dal database
+    public Collection<Ordine> doRetrieveAll() throws SQLException {
+        String query = "SELECT * FROM Ordine";
+        Collection<Ordine> ordini = new ArrayList<>();
+        
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query);
+             ResultSet rs = ps.executeQuery()) {
+            
+            while (rs.next()) {
+                model.Ordine ordine = new model.Ordine();
+                ordine.setIdOrdine(rs.getInt("ID_Ordine"));
+                ordine.setIdUtente(rs.getInt("ID_Utente"));
+                ordine.setTotaleOrdine(rs.getDouble("Totale_Ordine"));
+                ordini.add(ordine);
+            }
+        }
+        return ordini;
     }
 
 }
