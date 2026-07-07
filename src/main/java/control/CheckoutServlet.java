@@ -51,11 +51,18 @@ public class CheckoutServlet extends HttpServlet {
         }
         
         try {
-            //Calcoliamo il totale da pagare scorrendo tutte le scarpe nel carrelloo
+            //Calcoliamo il totale da pagare scorrendo tutte le scarpe nel carrello
             double totale = 0;
             for (model.Scarpa scarpa : carrello) {
                 totale += scarpa.getPrezzoAttuale();
             }
+            
+            //Creiamo l'oggetto dell'ordine e chiamiamo il suo DAO
+            model.Ordine nuovoOrdine = new model.Ordine();
+            nuovoOrdine.setIdUtente(utente.getIdUtente()); 	//Colleghiamo l'ordine al cliente
+            nuovoOrdine.setTotaleOrdine(totale);
+            
+            model.OrdineDAODataSource ordineDao = new model.OrdineDAODataSource();
 	}
 
 	/**
