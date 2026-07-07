@@ -31,7 +31,14 @@ public class CheckoutServlet extends HttpServlet {
         jakarta.servlet.http.HttpSession session = request.getSession();
         
         //Estraiamo l'utente loggato(dalla sessione), per vedere CHI sta comprando
+        //Infatti ci prendiamo "utenteLoggato" dalla Servlet LoginServlet(dovè lì abbiamo fatto session.setAttribute)
         model.UtenteRegistrato utente = (model.UtenteRegistrato) session.getAttribute("utenteLoggato");
+        
+        //Se l'utente è null (non ha fatto il login), lo mandiamo alla pagina di login
+        if (utente == null) {
+            response.sendRedirect("login.jsp");
+            return; //Ferma l'esecuzione del codice
+        }
 	}
 
 	/**
