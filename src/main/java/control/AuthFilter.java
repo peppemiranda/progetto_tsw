@@ -10,6 +10,8 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 
+//L'annotazione dice a Tomcat quali pagine specifiche deve "controllare" questo Filtro
+@WebFilter(urlPatterns = {"/storico.jsp", "/CheckoutServlet", "/StoricoOrdiniServlet", "/carrello.jsp"})
 public class AuthFilter extends HttpFilter {
 	
 	@Override
