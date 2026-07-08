@@ -25,6 +25,15 @@ public class AuthFilter extends HttpFilter {
         
         //Verifichiamo se l'utente è regolarmente loggato
         loggato = (session != null && session.getAttribute("utenteLoggato") != null);
-		
-	}
+        
+        if (loggato) {	//Se l'utente è loggato
+
+            //Il comando 'chain.doFilter' fa "entrare" l'utente
+            chain.doFilter(request, response);
+            
+        } else {  //Se l'utente NON è loggato
+        
+            response.sendRedirect("login.jsp");	// Lo blocchiamo e lo rispediamo a fare il login
+        }
+    }
 }
