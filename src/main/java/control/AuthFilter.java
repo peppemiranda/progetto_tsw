@@ -18,5 +18,13 @@ public class AuthFilter extends HttpFilter {
 	protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 		throws IOException, ServletException {
 		
+		boolean loggato;
+		
+		//Recuperiamo la sessione dell'utente(se esiste), se non esiste NON ne crea una nuova
+        HttpSession session = request.getSession(false);
+        
+        //Verifichiamo se l'utente è regolarmente loggato
+        loggato = (session != null && session.getAttribute("utenteLoggato") != null);
+		
 	}
 }
