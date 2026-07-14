@@ -86,7 +86,20 @@ body {
 }
 
 
+/*Link alternativi(registrazione) */
+/* Classe "testo-alternativo" */
+.testo-alternativo {
+    text-align: center;
+    margin-top: 20px;	/* Spazio vuoto esterno in alto */
+    font-size: 14px;
+}
 
+/* Classe "link-verde" */
+.link-verde {
+    color: #27ae60;
+    text-decoration: none;	/* Nessuna decorazione */
+    font-weight: bold;
+}
 
 
 
