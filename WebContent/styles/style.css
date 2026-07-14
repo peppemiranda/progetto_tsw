@@ -28,3 +28,38 @@ body {
     font-weight: bold;	/* Peso del carattere */
     text-decoration: none;	/* Nessuna decorazione */
 }
+
+
+/* Contenitore principale */
+/* Classe "contenitore-form" */
+.contenitore-form {
+    width: 40%; 	/* Larghezza */
+    margin: 50px auto;	 /* Spazio vuoto esterno */
+    background-color: #ffffff;
+    padding: 30px;
+    border: 1px solid #cccccc;
+}
+
+/* Classe "titolo-form" */
+.titolo-form {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
