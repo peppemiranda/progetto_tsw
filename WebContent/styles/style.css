@@ -48,6 +48,27 @@ body {
 }
 
 
+/* Gestione dei campi di input */
+/* Classe "campo-form" */
+.campo-form {
+    margin-bottom: 15px;
+}
+
+/* Classe "etichetta-input" */
+.etichetta-input {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333333;
+}
+
+/* Classe "input-testo" */
+.input-testo {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+    font-size: 14px;
+}
 
 
 
