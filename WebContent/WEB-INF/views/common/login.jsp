@@ -37,6 +37,11 @@
             <input type="submit" value="Entra nel sito" class="bottone-verde">
             
         </form>
+        
+        <div class="testo-alternativo">
+            Non hai ancora un account? <a href="registrazione.jsp" class="link-verde">Registrati ora</a>
+        </div>
+    </div>
 
 </body>
 </html>
