@@ -102,11 +102,17 @@ body {
 }
 
 
-
-
-
-
-
-
-
+/* MEDIA QUERIES */
+@media screen and (max-width: 800px) {	/* Se lo schermo è più piccolo di 800px si eseguono le seguenti regole per 
+	"contenitore-form" e "input-testo" (esempio, la larghezza è più ampia suli schermi più piccoli) */
+	
+    .contenitore-form {
+        width: 85%;
+        margin: 20px auto;
+    }
+    
+    .input-testo {
+        width: 95%;
+    }
+}
 
