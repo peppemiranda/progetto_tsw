@@ -15,5 +15,28 @@
 </head>
 <body>
 
+<div class="intestazione">
+        <a href="index.jsp" class="titolo-sito">PianetaCalcio</a>
+    </div>
+
+    <div class="contenitore-form">
+        <h2 class="titolo-form">Accesso Utente</h2>
+        
+        <form action="LoginServlet" method="POST">
+            
+            <div class="campo-form">
+                <label for="email" class="etichetta-input">Indirizzo Email:</label>
+                <input type="text" id="email" name="email" class="input-testo">
+            </div>
+            
+            <div class="campo-form">
+                <label for="password" class="etichetta-input">Password:</label>
+                <input type="password" id="password" name="password" class="input-testo">
+            </div>
+            
+            <input type="submit" value="Entra nel sito" class="bottone-verde">
+            
+        </form>
+
 </body>
 </html>
