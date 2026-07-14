@@ -1,1 +1,10 @@
 @charset "UTF-8";
+
+/* Impostazione di base: stile per il body */
+body {
+    background-color: #f8f9fa;
+    color: #333333;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
