@@ -18,6 +18,28 @@
 	<header class="intestazione">
         <a href="CatalogoServlet" class="titolo-sito">PianetaCalcio</a>
     </header>
+    
+    <main class="contenitore-form">
+        <h2 class="titolo-form">Accesso Utente</h2>
+        
+        <form action="LoginServlet" method="POST">
+            <div class="campo-form">
+                <label for="email" class="etichetta-input">Indirizzo Email:</label>
+                <input type="text" id="email" name="email" class="input-testo" required>
+            </div>
+            
+            <div class="campo-form">
+                <label for="password" class="etichetta-input">Password:</label>
+                <input type="password" id="password" name="password" class="input-testo" required>
+            </div>
+            
+            <input type="submit" value="Entra nel sito" class="bottone-verde">
+        </form>
+        
+        <div class="testo-alternativo">
+            Non hai ancora un account? <a href="RegistrazioneServlet" class="link-verde">Registrati ora</a>
+        </div>
+    </main>
 
 </body>
 </html>
