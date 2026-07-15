@@ -24,8 +24,8 @@
             <h1><c:out value="${scarpa.modello}" /></h1>
             <p>Marca: <c:out value="${scarpa.marca}" /></p>
             <p>Prezzo: € <c:out value="${scarpa.prezzoAttuale}" /></p>
-            <form action="CarrelloServlet" method="POST">
-                <input type="hidden" name="id" value="${scarpa.id}">
+            <form action="CarrelloServlet?azione=aggiungi" method="POST">
+                <input type="hidden" name="id" value="${scarpa.idScarpa}">
                 <button type="submit" class="bottone-verde">Aggiungi al Carrello</button>
             </form>
         </article>
