@@ -90,6 +90,14 @@
         </section>
         
     </main>
-
+    
+    <footer class="footer-sito">
+        <div class="contenitore-footer">
+            <span class="link-footer"><a href="#">Chi siamo</a></span>
+            <span class="link-footer"><a href="#">Condizioni di vendita</a></span>
+            <span class="link-footer"><a href="#">Contatti</a></span>
+        </div>
+    </footer>
+    
 </body>
 </html>
