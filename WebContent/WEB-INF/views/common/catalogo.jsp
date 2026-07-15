@@ -42,6 +42,28 @@
             </div>
         </nav>
     </header>
+    
+    <main class="contenitore-principale">
+        
+        <aside class="colonna-filtri">
+            <h3 class="titolo-filtri">FILTRI RICERCA</h3>
+            <form action="CatalogoServlet" method="GET">
+                <div class="gruppo-filtro">
+                    <h4 class="nome-filtro">Marca</h4>
+                    <label><input type="checkbox" name="marca" value="Nike"> Nike</label><br>
+                    <label><input type="checkbox" name="marca" value="Adidas"> Adidas</label><br>
+                    <label><input type="checkbox" name="marca" value="Puma"> Puma</label>
+                </div>
+                
+                <div class="gruppo-filtro">
+                    <h4 class="nome-filtro">Terreno</h4>
+                    <label><input type="checkbox" name="terreno" value="FG"> FG (Compatto)</label><br>
+                    <label><input type="checkbox" name="terreno" value="SG"> SG (Morbido)</label>
+                </div>
+                
+                <button type="submit" class="bottone-verde">Applica Filtri</button>
+            </form>
+        </aside>
 
 </body>
 </html>
