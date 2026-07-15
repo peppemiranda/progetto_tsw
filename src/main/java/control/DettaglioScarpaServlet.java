@@ -45,10 +45,10 @@ public class DettaglioScarpaServlet extends HttpServlet {
 
                 if (scarpaTrovata != null) {
                 	//Se la scarpa esiste nel database la mettiamo nella request con l'etichetta "scarpaDettaglio"
-                    request.setAttribute("scarpaDettaglio", scarpaTrovata);
+                    request.setAttribute("scarpa", scarpaTrovata);
 
                     //Poi la pagina HTML/JSP che mostrerà la foto e il prezzo
-                    jakarta.servlet.RequestDispatcher dispatcher = request.getRequestDispatcher("dettaglio.jsp");
+                    jakarta.servlet.RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/common/dettaglio_prodotto.jsp");
                     dispatcher.forward(request, response);
                     
                 } else {	//La scarpa NON è presente nel database
