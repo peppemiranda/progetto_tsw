@@ -40,6 +40,12 @@
             Non hai ancora un account? <a href="RegistrazioneServlet" class="link-verde">Registrati ora</a>
         </div>
     </main>
+    
+    <footer class="footer-sito">
+        <div class="contenitore-footer">
+            <span class="link-footer"><a href="#">Contatti</a></span>
+        </div>
+    </footer>
 
 </body>
 </html>
