@@ -11,7 +11,7 @@
 
 	<title>Accedi - PianetaCalcio</title>
     
-<link rel="stylesheet" type="text/css" href="../../styles/style.css">	<!-- Collegamento al file .css -->
+	<link rel="stylesheet" type="text/css" href="styles/style.css">		<!-- Collegamento al file .css -->
 </head>
 <body>
 
