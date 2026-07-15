@@ -48,6 +48,10 @@
             <input type="submit" value="Registrati" class="bottone-verde">
             
         </form>
-
+        
+        <div class="testo-alternativo">
+            Hai già un account? <a href="LoginServlet" class="link-verde">Accedi qui</a>
+        </div>
+    </div>
 </body>
 </html>
