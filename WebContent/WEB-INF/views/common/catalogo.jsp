@@ -64,6 +64,32 @@
                 <button type="submit" class="bottone-verde">Applica Filtri</button>
             </form>
         </aside>
+        
+        <section class="sezione-catalogo">
+            <div class="griglia-prodotti">
+                
+                <c:choose>
+                    <c:when test="${not empty listaScarpe}">
+                        <c:forEach var="scarpa" items="${listaScarpe}">
+                            <article class="scheda-prodotto">
+                                <img src="images/default.png" alt="<c:out value='${scarpa.nome}' />" class="immagine-scarpa">
+                                
+                                <h4 class="nome-prodotto"><c:out value="${scarpa.nome}" /></h4>
+                                <p class="prezzo-prodotto">€ <c:out value="${scarpa.prezzo}" /></p>
+                                
+                                <button class="bottone-verde">Aggiungi</button>
+                            </article>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <p class="messaggio-vuoto">Nessuna scarpetta attualmente disponibile nel catalogo.</p>
+                    </c:otherwise>
+                </c:choose>
+                
+            </div>
+        </section>
+        
+    </main>
 
 </body>
 </html>
