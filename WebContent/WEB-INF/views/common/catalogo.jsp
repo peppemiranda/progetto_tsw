@@ -18,8 +18,11 @@
 
 	<header class="intestazione-sito">
         <nav class="barra-navigazione">
-            <div class="logo">
-                <a href="CatalogoServlet" class="titolo-sito">PianetaCalcio</a>
+        
+        	<div class="logo">
+                <a href="CatalogoServlet">
+                    <img src="images/logo.png" alt="PianetaCalcio Logo" class="immagine-logo">
+                </a>
             </div>
             
             <div class="barra-ricerca">
