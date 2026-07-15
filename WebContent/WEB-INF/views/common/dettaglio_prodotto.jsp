@@ -12,5 +12,11 @@
 </head>
 <body>
 
+	<header class="intestazione-sito">
+        <nav class="barra-navigazione">
+            <a href="CatalogoServlet" class="titolo-sito">PianetaCalcio</a>
+        </nav>
+    </header>
+
 </body>
 </html>
