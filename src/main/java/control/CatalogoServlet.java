@@ -40,7 +40,7 @@ public class CatalogoServlet extends HttpServlet {
             request.setAttribute("listaScarpe", catalogo);
 
             // Con RequestDispatcher passiamo tutto alla pagina HTML/JSP.
-            jakarta.servlet.RequestDispatcher dispatcher = request.getRequestDispatcher("catalogo.jsp");
+            jakarta.servlet.RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/common/catalogo.jsp");
             dispatcher.forward(request, response);
 
         } catch (java.sql.SQLException e) {

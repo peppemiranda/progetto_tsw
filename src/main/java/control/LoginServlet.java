@@ -56,14 +56,14 @@ public class LoginServlet extends HttpServlet {
             	//Se esiste, creiamo all'utente la sessione
                 request.getSession().setAttribute("utenteLoggato", utente);
                 
-                //Lo mandiamo alla home page del sito
-                response.sendRedirect("index.jsp"); 
+                //Lo mandiamo alla home page del sito(al catalogo)
+                response.sendRedirect("CatalogoServlet"); 
                 
             } else {	//L'utente NON esiste
 
             	//Quindi(è null) o l'email o la password è sbagliata. Rimandiamo l'utente alla pagina di login,
             	//aggiungendo un segnale di errore nell'URL
-                response.sendRedirect("login.jsp?errore=true");
+                response.sendRedirect("LoginServlet?errore=true");
             }
             
         } catch (java.sql.SQLException e) {
