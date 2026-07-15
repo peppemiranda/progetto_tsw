@@ -32,6 +32,14 @@
                         </tr>
                     </c:forEach>
                 </table>
+                
+                <a href="CarrelloServlet?azione=svuota">Svuota tutto</a>
+            </c:when>
+            <c:otherwise>
+                <p>Il carrello è vuoto.</p>
+            </c:otherwise>
+        </c:choose>
+    </main>
 
 </body>
 </html>
