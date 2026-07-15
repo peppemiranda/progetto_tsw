@@ -21,12 +21,22 @@
     </header>
     
     <main class="contenitore-form">
-        <h2 class="titolo-form">Accesso Utente</h2>
+        <h2 class="titolo-form">Crea un Account</h2>
         
-        <form action="LoginServlet" method="POST">
+        <form action="RegistrazioneServlet" method="POST">
+            <div class="campo-form">
+                <label for="nome" class="etichetta-input">Nome:</label>
+                <input type="text" id="nome" name="nome" class="input-testo" required>
+            </div>
+            
+            <div class="campo-form">
+                <label for="cognome" class="etichetta-input">Cognome:</label>
+                <input type="text" id="cognome" name="cognome" class="input-testo" required>
+            </div>
+            
             <div class="campo-form">
                 <label for="email" class="etichetta-input">Indirizzo Email:</label>
-                <input type="text" id="email" name="email" class="input-testo" required>
+                <input type="email" id="email" name="email" class="input-testo" required>
             </div>
             
             <div class="campo-form">
@@ -34,13 +44,24 @@
                 <input type="password" id="password" name="password" class="input-testo" required>
             </div>
             
-            <input type="submit" value="Entra nel sito" class="bottone-verde">
+            <div class="campo-form">
+                <label for="indirizzo" class="etichetta-input">Indirizzo di Spedizione:</label>
+                <input type="text" id="indirizzo" name="indirizzo" class="input-testo" required>
+            </div>
+            
+            <input type="submit" value="Registrati" class="bottone-verde">
         </form>
         
         <div class="testo-alternativo">
-            Non hai ancora un account? <a href="RegistrazioneServlet" class="link-verde">Registrati ora</a>
+            Hai già un account? <a href="LoginServlet" class="link-verde">Accedi qui</a>
         </div>
     </main>
+
+    <footer class="footer-sito">
+        <div class="contenitore-footer">
+            <span class="link-footer"><a href="#">Contatti</a></span>
+        </div>
+    </footer>
 
 </body>
 </html>
