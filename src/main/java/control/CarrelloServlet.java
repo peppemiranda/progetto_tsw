@@ -83,8 +83,10 @@ public class CarrelloServlet extends HttpServlet {
         }
         
         //Rimandiamo l'utente alla pagina del carrello.
-        //Usiamo sendRedirect(e non RequestDispatcher) perchè il carrello è nella sessione, quindi la pagina lo troverà da sola
-        response.sendRedirect("carrello.jsp");
+        //Usiamo il RequestDispatcher per puntare alla cartella protetta
+        jakarta.servlet.RequestDispatcher dispatcher = 
+        	    request.getRequestDispatcher("/WEB-INF/views/common/carrello.jsp");
+        	dispatcher.forward(request, response);
 	}
 
 	/**
