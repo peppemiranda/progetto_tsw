@@ -102,6 +102,55 @@ body {
 }
 
 
+/* Layout Catalogo */ 
+.contenitore-principale {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 15px;
+    overflow: hidden; 	/* Per contenere gli elementi "float" */
+}
+
+.colonna-filtri {
+    float: left; 	/* Spinge la colonna a sinistra */
+    width: 22%;
+    background-color: #ffffff;
+    padding: 15px;
+    border: 1px solid #cccccc;
+    box-sizing: border-box;   /* Il padding non tocca la larghezza */
+}
+
+.sezione-catalogo {
+    float: right; 	/* Spinge il catalogo a destra */
+    width: 75%;
+    box-sizing: border-box;
+}
+
+
+
+/* Griglia dei prodotti */
+.griglia-prodotti {
+    text-align: left; 	/* Allinea le scarpe a sinistra */
+}
+
+.scheda-prodotto {
+    display: inline-block; 	/* Mette le schede una accanto all'altra */
+    width: 31%; 	/* Circa 3 schede per riga */
+    margin: 1%;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    padding: 15px;
+    text-align: center;
+    box-sizing: border-box;
+    vertical-align: top; 	/* Le allinea tutte in alto */
+}
+
+.immagine-scarpa {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
 /* MEDIA QUERIES */
 @media screen and (max-width: 800px) {	/* Se lo schermo è più piccolo di 800px si eseguono le seguenti regole per 
 	"contenitore-form" e "input-testo" (esempio, la larghezza è più ampia suli schermi più piccoli) */
