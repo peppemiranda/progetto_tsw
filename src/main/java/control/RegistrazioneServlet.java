@@ -26,8 +26,8 @@ public class RegistrazioneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+			request.getRequestDispatcher("/WEB-INF/views/common/registrazione.jsp")
+			       .forward(request,response);
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class RegistrazioneServlet extends HttpServlet {
             dao.doSave(nuovoUtente);
             
             // Se il database salva tutto correttamente, reindirizziamo l'utente alla pagina di login
-            response.sendRedirect("login.jsp"); 
+            response.sendRedirect("LoginServlet");
             
         } catch (java.sql.SQLException e) {
             e.printStackTrace(); 	// In caso di errore nel DB, stampiamo il problema nella console

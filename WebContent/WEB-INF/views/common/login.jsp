@@ -39,7 +39,7 @@
         </form>
         
         <div class="testo-alternativo">
-            Non hai ancora un account? <a href="registrazione.jsp" class="link-verde">Registrati ora</a>
+            Non hai ancora un account? <a href="RegistrazioneServlet" class="link-verde">Registrati ora</a>
         </div>
     </div>
 

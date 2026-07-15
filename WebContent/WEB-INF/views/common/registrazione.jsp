@@ -45,6 +45,11 @@
                 <input type="password" id="password" name="password" class="input-testo" required>
             </div>
             
+            <div class="campo-form">
+                <label for="indirizzo" class="etichetta-input">Indirizzo di Spedizione:</label>
+                <input type="text" id="indirizzo" name="indirizzo" class="input-testo" required>
+            </div>
+            
             <input type="submit" value="Registrati" class="bottone-verde">
             
         </form>
