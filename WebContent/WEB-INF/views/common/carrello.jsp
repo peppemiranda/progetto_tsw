@@ -34,6 +34,11 @@
                 </table>
                 
                 <a href="CarrelloServlet?azione=svuota">Svuota tutto</a>
+                
+             <form action="CheckoutServlet" method="GET">
+    				<button type="submit" class="bottone-verde">Procedi all'acquisto</button>
+			</form>
+			
             </c:when>
             <c:otherwise>
                 <p>Il carrello è vuoto.</p>
