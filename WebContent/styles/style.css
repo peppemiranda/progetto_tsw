@@ -185,7 +185,13 @@ body {
     width: 200px;
 }
 
-
+.immagine-logo {
+    height: 40px; 
+    width: 110px;
+    height: 90px;
+    vertical-align: middle;
+    margin: 6px;
+}
 
 /* Icona del carrello */
 .immagine-icona-carrello {
