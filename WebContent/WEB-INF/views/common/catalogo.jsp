@@ -75,11 +75,11 @@
                     <c:when test="${not empty listaScarpe}">
                         <c:forEach var="scarpa" items="${listaScarpe}">
                             <article class="scheda-prodotto">
-                            	<a href="DettaglioScarpaServlet?id=${scarpa.id}">
-                                <img src="images/default.png" alt="<c:out value='${scarpa.nome}' />" class="immagine-scarpa">
+                            	<a href="DettaglioScarpaServlet?id=${scarpa.idScarpa}">
+                                <img src="images/default.png" alt="<c:out value='${scarpa.modello}' />" class="immagine-scarpa">
                                 
-                                <h4 class="nome-prodotto"><c:out value="${scarpa.nome}" /></h4>
-                                <p class="prezzo-prodotto">€ <c:out value="${scarpa.prezzo}" /></p>
+                                <h4 class="nome-prodotto"><c:out value="${scarpa.modello}" /></h4>
+                                <p class="prezzo-prodotto">€ <c:out value="${scarpa.prezzoAttuale}" /></p>
                                 
                                 <button class="bottone-verde">Aggiungi</button>
                             </article>
