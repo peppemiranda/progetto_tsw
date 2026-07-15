@@ -16,6 +16,22 @@
 	<header class="intestazione-sito">
         <a href="CatalogoServlet" class="titolo-sito">PianetaCalcio</a>
     </header>
+    
+    <main class="contenitore-principale">
+        <h2>Il tuo Carrello</h2>
+        <c:choose>
+            <c:when test="${not empty carrello}">
+                <table>
+                    <tr><th>Modello</th><th>Marca</th><th>Prezzo</th><th>Azione</th></tr>
+                    <c:forEach var="scarpa" items="${carrello}">
+                        <tr>
+                            <td><c:out value="${scarpa.modello}" /></td>
+                            <td><c:out value="${scarpa.marca}" /></td>
+                            <td>€ <c:out value="${scarpa.prezzoAttuale}" /></td>
+                            <td><a href="CarrelloServlet?azione=rimuovi&id=${scarpa.idScarpa}">Rimuovi</a></td>
+                        </tr>
+                    </c:forEach>
+                </table>
 
 </body>
 </html>
