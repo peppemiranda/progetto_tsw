@@ -16,47 +16,9 @@
 </head>
 <body>
 
-<div class="intestazione">
-        <a href="index.jsp" class="titolo-sito">PianetaCalcio</a>
-    </div>
+	<header class="intestazione">
+        <a href="CatalogoServlet" class="titolo-sito">PianetaCalcio</a>
+    </header>
 
-    <div class="contenitore-form">
-        <h2 class="titolo-form">Crea un Account</h2>
-        
-        <form action="RegistrazioneServlet" method="POST">
-            
-            <div class="campo-form">
-                <label for="nome" class="etichetta-input">Nome:</label>
-                <input type="text" id="nome" name="nome" class="input-testo" required>
-            </div>
-            
-            <div class="campo-form">
-                <label for="cognome" class="etichetta-input">Cognome:</label>
-                <input type="text" id="cognome" name="cognome" class="input-testo" required>
-            </div>
-            
-            <div class="campo-form">
-                <label for="email" class="etichetta-input">Indirizzo Email:</label>
-                <input type="email" id="email" name="email" class="input-testo" required>
-            </div>
-            
-            <div class="campo-form">
-                <label for="password" class="etichetta-input">Password:</label>
-                <input type="password" id="password" name="password" class="input-testo" required>
-            </div>
-            
-            <div class="campo-form">
-                <label for="indirizzo" class="etichetta-input">Indirizzo di Spedizione:</label>
-                <input type="text" id="indirizzo" name="indirizzo" class="input-testo" required>
-            </div>
-            
-            <input type="submit" value="Registrati" class="bottone-verde">
-            
-        </form>
-        
-        <div class="testo-alternativo">
-            Hai già un account? <a href="LoginServlet" class="link-verde">Accedi qui</a>
-        </div>
-    </div>
 </body>
 </html>
