@@ -5,7 +5,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Ordine;
+import model.OrdineDAODataSource;
+import model.Scarpa;
+import model.ScarpaDAODataSource;
+
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Collection;
 
 /**
  * Servlet implementation class AdminServlet
@@ -26,8 +33,50 @@ public class AdminServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		String azione = request.getParameter("azione");
+        ScarpaDAODataSource scarpaDAO = new ScarpaDAODataSource();
+        OrdineDAODataSource ordineDAO = new OrdineDAODataSource();
+
+        try {
+            if ("gestioneCatalogo".equalsIgnoreCase(azione)) {
+            	
+                //Recuperiamo tutte le scarpe per mostrarle nella tabella di gestione
+                Collection<Scarpa> catalogo = scarpaDAO.doRetrieveAll();
+                request.setAttribute("listaScarpe", catalogo);
+                
+                //Se stiamo modificando una scarpa, carichiamo i suoi dati correnti nel form
+                String idModifica = request.getParameter("idModifica");
+                if (idModifica != null && !idModifica.isEmpty()) {
+                    Scarpa scarpaDaModificare = scarpaDAO.doRetrieveByKey(Integer.parseInt(idModifica));
+                    request.setAttribute("scarpaDaModificare", scarpaDaModificare);
+                }
+
+                request.getRequestDispatcher("/WEB-INF/views/admin/gestione_catalogo.jsp").forward(request, response);
+                
+            } else if ("reportOrdini".equalsIgnoreCase(azione)) {
+                //Per visualizzare gli ordini complessivi, dalla data x alla data y, e per cliente
+                String dataInizio = request.getParameter("dataInizio");
+                String dataFine = request.getParameter("dataFine");
+                String idClienteStr = request.getParameter("idCliente");
+
+                Collection<Ordine> ordini;
+                
+                //Qui facciamo una retrieve totale dei report; se i filtri non sono impostati, mostriamo tutto
+                ordini = ordineDAO.doRetrieveAll(); 
+                
+                request.setAttribute("listaOrdini", ordini);
+                request.getRequestDispatcher("/WEB-INF/views/admin/report_ordini.jsp").forward(request, response);
+                
+            } else {
+            	
+                //Di default, se non c'è azione o l'azione è sconosciuta, mostriamo la dashboard principale
+                request.getRequestDispatcher("/WEB-INF/views/admin/dashboard.jsp").forward(request, response);
+            }
+        } catch (SQLException | NumberFormatException e) {
+            e.printStackTrace();
+            request.getRequestDispatcher("/WEB-INF/views/common/errore.jsp").forward(request, response);
+        }
 	}
 
 	/**
