@@ -61,7 +61,8 @@
                         <c:forEach var="scarpa" items="${listaScarpe}">
                             <article class="scheda-prodotto">
                                 <a href="DettaglioScarpaServlet?id=${scarpa.idScarpa}" class="link-neutro">
-                                    <img src="images/default.png" alt="<c:out value='${scarpa.modello}' />" class="immagine-scarpa">
+                                    <!-- RIGA MODIFICATA: ORA LEGGE L'IMMAGINE DINAMICA DAL DATABASE -->
+                                    <img src="${scarpa.immagine}" alt="<c:out value='${scarpa.modello}' />" class="immagine-scarpa">
                                     <h4 class="nome-prodotto"><c:out value="${scarpa.modello}" /></h4>
                                     <p class="prezzo-prodotto">€ <c:out value="${scarpa.prezzoAttuale}" /></p>
                                 </a>
