@@ -1,18 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-
-<!-- Visto che file .css abbiamo messo un media quries, per controllare come uno smartphone inquadra la nostra pagina, 
-	dobbiamo inserire obbligatoriamente ciò: -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<title>Registrazione - PianetaCalcio</title>
-
-<link rel="stylesheet" type="text/css" href="styles/style.css">		<!-- Collegamento al file .css -->
-
+<title>Registrazione - PianetaCalcio</title>
+<link rel="stylesheet" type="text/css" href="styles/style.css">
 </head>
 <body>
 
@@ -22,6 +16,10 @@
     
     <main class="contenitore-form">
         <h2 class="titolo-form">Crea un Account</h2>
+        
+        <c:if test="${param.errore == 'email_esistente'}">
+            <p class="messaggio-errore">Questa email è già registrata. Usa un'altra email o accedi.</p>
+        </c:if>
         
         <form action="RegistrazioneServlet" method="POST">
             <div class="campo-form">
@@ -40,8 +38,8 @@
             </div>
             
             <div class="campo-form">
-                <label for="password" class="etichetta-input">Password:</label>
-                <input type="password" id="password" name="password" class="input-testo" required>
+                <label for="password" class="etichetta-input">Password (minimo 8 caratteri):</label>
+                <input type="password" id="password" name="password" class="input-testo" minlength="8" required>
             </div>
             
             <div class="campo-form">
@@ -53,7 +51,8 @@
         </form>
         
         <div class="testo-alternativo">
-            Hai già un account? <a href="LoginServlet" class="link-verde">Accedi qui</a>
+            Hai già un account?
+            <a href="LoginServlet" class="link-verde">Accedi qui</a>
         </div>
     </main>
 
