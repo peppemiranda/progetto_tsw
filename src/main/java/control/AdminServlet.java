@@ -83,8 +83,51 @@ public class AdminServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		String operazione = request.getParameter("operazione");
+        ScarpaDAODataSource scarpaDAO = new ScarpaDAODataSource();
+
+        try {
+            if ("aggiungi".equalsIgnoreCase(operazione)) {
+                Scarpa nuova = new Scarpa();
+                // CORREZIONE: usiamo solo e soltanto i metodi presenti in Scarpa.java
+                nuova.setMarca(request.getParameter("marca"));
+                nuova.setModello(request.getParameter("modello"));
+                nuova.setTerreno(request.getParameter("terreno"));
+                nuova.setPrezzoAttuale(Double.parseDouble(request.getParameter("prezzo")));
+                nuova.setPezziMagazzino(Integer.parseInt(request.getParameter("pezziMagazzino")));
+
+                scarpaDAO.doSave(nuova);
+                response.sendRedirect("AdminServlet?azione=gestioneCatalogo");
+
+            } else if ("modifica".equalsIgnoreCase(operazione)) {
+                int id = Integer.parseInt(request.getParameter("idScarpa"));
+                Scarpa esistente = scarpaDAO.doRetrieveByKey(id);
+                
+                if (esistente != null) {
+                    // CORREZIONE: allineato a Scarpa.java
+                    esistente.setMarca(request.getParameter("marca"));
+                    esistente.setModello(request.getParameter("modello"));
+                    esistente.setTerreno(request.getParameter("terreno"));
+                    esistente.setPrezzoAttuale(Double.parseDouble(request.getParameter("prezzo")));
+                    esistente.setPezziMagazzino(Integer.parseInt(request.getParameter("pezziMagazzino")));
+                    
+                    scarpaDAO.doUpdate(esistente); 
+                }
+                response.sendRedirect("AdminServlet?azione=gestioneCatalogo");
+
+            } else if ("elimina".equalsIgnoreCase(operazione)) {
+                int id = Integer.parseInt(request.getParameter("idScarpa"));
+                scarpaDAO.doDelete(id); 
+                response.sendRedirect("AdminServlet?azione=gestioneCatalogo");
+                
+            } else {
+                response.sendRedirect("AdminServlet");
+            }
+        } catch (SQLException | NumberFormatException e) {
+            e.printStackTrace();
+            request.getRequestDispatcher("/WEB-INF/views/common/errore.jsp").forward(request, response);
+        }
 	}
 
 }
