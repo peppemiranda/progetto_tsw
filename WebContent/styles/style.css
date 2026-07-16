@@ -306,6 +306,32 @@ body {
     border-bottom: 1px solid #cccccc;
 }
 
+
+/* Sezione Admin */
+
+.contenitore-dashboard {
+    text-align: center;
+    margin-top: 40px;
+}
+.scheda-admin {
+    display: inline-block;
+    width: 45%;
+    vertical-align: top;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    padding: 20px;
+    margin: 10px;
+    box-sizing: border-box;
+}
+.titolo-sezione-admin {
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+.testo-admin {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
 /* MEDIA QUERIES */
 @media screen and (max-width: 800px) {	/* Se lo schermo è più piccolo di 800px si eseguono le seguenti regole per 
 	"contenitore-form" e "input-testo" (esempio, la larghezza è più ampia suli schermi più piccoli) */
