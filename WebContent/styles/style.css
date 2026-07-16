@@ -276,6 +276,24 @@ body {
 	display: inline;
 }
 
+
+/* Pagina di errore */
+
+.contenitore-errore {
+	text-align: center;
+	padding: 50px;
+}
+
+.titolo-errore {
+	color: red;
+	margin-bottom: 20px;
+}
+
+.testo-errore {
+	font-size: 18px;
+	margin-bottom: 30px;
+}
+
 /* MEDIA QUERIES */
 @media screen and (max-width: 800px) {	/* Se lo schermo è più piccolo di 800px si eseguono le seguenti regole per 
 	"contenitore-form" e "input-testo" (esempio, la larghezza è più ampia suli schermi più piccoli) */
