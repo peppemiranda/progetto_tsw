@@ -57,5 +57,12 @@
             
         </div>
     </main>
+    
+    <footer class="footer-sito">
+        <div class="contenitore-footer">
+            <span class="link-footer">PianetaCalcio - Area Riservata Amministratore</span>
+        </div>
+    </footer>
+    
 </body>
 </html>
