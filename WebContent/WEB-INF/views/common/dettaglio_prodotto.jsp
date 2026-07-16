@@ -20,11 +20,12 @@
     
     <main class="contenitore-principale">
         <article class="dettaglio-prodotto">
-            <img src="images/scarpe/default.jpg" alt="<c:out value='${scarpa.nome}' />" class="immagine-dettaglio">
+            <img src="images/default.png" alt="<c:out value='${scarpa.modello}' />" class="immagine-dettaglio">
             <h1><c:out value="${scarpa.modello}" /></h1>
             <p>Marca: <c:out value="${scarpa.marca}" /></p>
             <p>Prezzo: € <c:out value="${scarpa.prezzoAttuale}" /></p>
-            <form action="CarrelloServlet?azione=aggiungi" method="POST">
+            <form action="CarrelloServlet" method="POST">
+            	<input type="hidden" name="azione" value="aggiungi">
                 <input type="hidden" name="id" value="${scarpa.idScarpa}">
                 <button type="submit" class="bottone-verde">Aggiungi al Carrello</button>
             </form>
