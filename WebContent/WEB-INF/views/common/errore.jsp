@@ -19,10 +19,10 @@
         </nav>
     </header>
     
-    <main class="contenitore-principale">
-        <h1 style="color: red; margin-bottom: 20px;">Ops! Qualcosa è andato storto.</h1>
-        <p>
-            Si è verificato un errore tecnico temporaneo<br>
+    <main class="contenitore-errore">
+        <h1 class="titolo-errore">Ops! Qualcosa è andato storto.</h1>
+        <p class="testo-errore">
+            Si è verificato un errore tecnico temporaneo.<br>
             Non preoccuparti, il tuo carrello e i tuoi dati sono al sicuro.
         </p>
         
