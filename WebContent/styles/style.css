@@ -234,6 +234,48 @@ body {
     text-decoration: none;
 }
 
+
+/* Messaggi di sistema */
+
+.messaggio-errore {
+	color: red;
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+
+.messaggio-successo {
+	color: green;
+	text-align: center;
+	margin-top: 15px;
+}
+
+
+/* Link e bottoni carrello/catalogo */
+
+.link-neutro {
+	text-decoration: none;
+	color: black;
+}
+
+.bottone-rimuovi {
+	background: none;
+	border: none;
+	color: red;
+	text-decoration: underline;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+.form-spaziato {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.form-inline {
+	display: inline;
+}
+
 /* MEDIA QUERIES */
 @media screen and (max-width: 800px) {	/* Se lo schermo è più piccolo di 800px si eseguono le seguenti regole per 
 	"contenitore-form" e "input-testo" (esempio, la larghezza è più ampia suli schermi più piccoli) */
