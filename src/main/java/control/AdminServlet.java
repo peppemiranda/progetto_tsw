@@ -111,6 +111,7 @@ public class AdminServlet extends HttpServlet {
                     esistente.setTerreno(request.getParameter("terreno"));
                     esistente.setPrezzoAttuale(Double.parseDouble(request.getParameter("prezzo")));
                     esistente.setPezziMagazzino(Integer.parseInt(request.getParameter("pezziMagazzino")));
+                    esistente.setImmagine(request.getParameter("immagine"));
                     
                     scarpaDAO.doUpdate(esistente); 
                 }
