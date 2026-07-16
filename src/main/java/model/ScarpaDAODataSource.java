@@ -28,6 +28,7 @@ public class ScarpaDAODataSource implements ScarpaDAO {
                     scarpa.setTerreno(rs.getString("Terreno"));
                     scarpa.setPrezzoAttuale(rs.getDouble("Prezzo_Attuale"));
                     scarpa.setPezziMagazzino(rs.getInt("Pezzi_Magazzino"));
+                    scarpa.setImmagine(rs.getString("Immagine"));  //Lettura immagine
                 }
             }
         }
@@ -52,6 +53,7 @@ public class ScarpaDAODataSource implements ScarpaDAO {
                 scarpa.setTerreno(rs.getString("Terreno"));
                 scarpa.setPrezzoAttuale(rs.getDouble("Prezzo_Attuale"));
                 scarpa.setPezziMagazzino(rs.getInt("Pezzi_Magazzino"));
+                scarpa.setImmagine(rs.getString("Immagine"));  //Lettura immagine
                 
                 catalogo.add(scarpa); // Aggiunge la scarpa alla lista del catalogo
             }
@@ -62,7 +64,7 @@ public class ScarpaDAODataSource implements ScarpaDAO {
 	//Salvare una nuova scarpa
     @Override
     public void doSave(Scarpa scarpa) throws SQLException {
-        String query = "INSERT INTO Scarpa (Marca, Modello, Terreno, Prezzo_Attuale, Pezzi_Magazzino) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Scarpa (Marca, Modello, Terreno, Prezzo_Attuale, Pezzi_Magazzino, Immagine) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection con = ConPool.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -72,6 +74,7 @@ public class ScarpaDAODataSource implements ScarpaDAO {
             ps.setString(3, scarpa.getTerreno() != null ? scarpa.getTerreno() : "FG"); // allback a FG se nullo
             ps.setDouble(4, scarpa.getPrezzoAttuale());
             ps.setInt(5, scarpa.getPezziMagazzino() > 0 ? scarpa.getPezziMagazzino() : 10); //Default 10 pezzi se non specificato
+            ps.setString(6, scarpa.getImmagine());  //Salvataggio immagine
             
             ps.executeUpdate();
         }
@@ -80,7 +83,7 @@ public class ScarpaDAODataSource implements ScarpaDAO {
     //Aggiornare i dati di una scarpa già esistente
     @Override
     public void doUpdate(Scarpa scarpa) throws SQLException {
-        String query = "UPDATE Scarpa SET Marca = ?, Modello = ?, Terreno = ?, Prezzo_Attuale = ?, Pezzi_Magazzino = ? WHERE ID_Scarpa = ?";
+        String query = "UPDATE Scarpa SET Marca = ?, Modello = ?, Terreno = ?, Prezzo_Attuale = ?, Pezzi_Magazzino = ?, Immagine = ? WHERE ID_Scarpa = ?";
 
         try (Connection con = ConPool.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -91,6 +94,7 @@ public class ScarpaDAODataSource implements ScarpaDAO {
             ps.setDouble(4, scarpa.getPrezzoAttuale());
             ps.setInt(5, scarpa.getPezziMagazzino());
             ps.setInt(6, scarpa.getIdScarpa());
+            ps.setString(6, scarpa.getImmagine());  //Aggiornamento immagine
             
             ps.executeUpdate();
         }

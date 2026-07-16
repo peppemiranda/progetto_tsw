@@ -1,3 +1,6 @@
+
+DROP DATABASE IF EXISTS pianetacalcio;
+
 -- Creazione del database e selezione
 CREATE DATABASE IF NOT EXISTS pianetacalcio;
 USE pianetacalcio;
@@ -13,14 +16,15 @@ CREATE TABLE Utente_Registrato (
     Indirizzo_Spedizione VARCHAR(255) NOT NULL
 );
 
--- 2. Tabella SCARPA
+-- 2. Tabella SCARPA (Aggiornata con colonna Immagine)
 CREATE TABLE Scarpa (
     ID_Scarpa INT AUTO_INCREMENT PRIMARY KEY,
     Marca VARCHAR(50) NOT NULL,
     Modello VARCHAR(100) NOT NULL,
     Terreno VARCHAR(10) NOT NULL, -- Es: 'FG', 'SG', 'TF'
     Prezzo_Attuale DECIMAL(10,2) NOT NULL, -- Significa che il numero può avere un massimo di 10 cifre totali, di cui esattamente 2 dopo la virgola(i centesimi)
-    Pezzi_Magazzino INT NOT NULL
+    Pezzi_Magazzino INT NOT NULL,
+    Immagine VARCHAR(255) -- Nuova colonna per gestire le foto
 );
 
 -- 3. Tabella ORDINE
