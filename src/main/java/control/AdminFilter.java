@@ -1,7 +1,14 @@
 package control;
 
+import java.io.IOException;
+
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpFilter;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 //Il Filter controlla "AdminServlet"
 @WebFilter(urlPatterns = {"/AdminServlet"})
@@ -32,6 +39,16 @@ public class AdminFilter extends HttpFilter {
                 //Quindi se l'utente è l'Admin, allora passa
                 chain.doFilter(request, response);
                 
+            } else {
+            	
+                // L'utente è loggato ma è un semplice cliente, quindi lo rispediamo al Catalogo
+                response.sendRedirect("CatalogoServlet");
             }
+            
+        } else {  
+        	
+            // L'utente è un ospite(non loggato), quindi Lo mandiamo al login
+            response.sendRedirect("LoginServlet");
+        }
 	}
 }
