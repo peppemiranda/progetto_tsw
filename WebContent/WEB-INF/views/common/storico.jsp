@@ -15,5 +15,25 @@
 </head>
 <body>
 
+	<header class="intestazione-sito">
+        <nav class="barra-navigazione">
+            <div class="logo">
+                <a href="CatalogoServlet">
+                    <img src="images/logo.png" alt="PianetaCalcio Logo" class="immagine-logo">
+                </a>
+            </div>
+            
+            <div class="carrello-info">
+                <a href="CarrelloServlet" class="link-neutro">
+                    <img src="images/carrello.png" alt="Carrello" class="immagine-icona-carrello"> 
+                    Cart: <c:out value="${not empty sessionScope.carrello ? sessionScope.carrello.size() : 0}" />
+                </a>
+                <span class="utente-loggato">
+                    Benvenuto, <c:out value="${sessionScope.utenteLoggato.nome}" default="Ospite" />!
+                </span>
+            </div>
+        </nav>
+    </header>
+
 </body>
 </html>
