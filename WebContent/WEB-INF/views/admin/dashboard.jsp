@@ -31,6 +31,31 @@
             </div>
         </nav>
     </header>
-
+    
+    <main class="contenitore-principale">
+        <h2 class="titolo-form">Pannello di Amministrazione</h2>
+        
+        <div class="contenitore-dashboard">
+            
+            <article class="scheda-admin">
+                <h3 class="titolo-sezione-admin">Gestione Catalogo</h3>
+                <p class="testo-admin">Aggiungi, modifica o elimina le scarpette dal database del negozio.</p>
+                <form action="AdminServlet" method="GET" class="form-spaziato">
+                    <input type="hidden" name="azione" value="gestioneCatalogo">
+                    <button type="submit" class="bottone-verde">Vai al Catalogo</button>
+                </form>
+            </article>
+            
+            <article class="scheda-admin">
+                <h3 class="titolo-sezione-admin">Report Ordini</h3>
+                <p class="testo-admin">Visualizza le statistiche e filtra gli acquisti effettuati dai clienti.</p>
+                <form action="AdminServlet" method="GET" class="form-spaziato">
+                    <input type="hidden" name="azione" value="reportOrdini">
+                    <button type="submit" class="bottone-verde">Vai ai Report</button>
+                </form>
+            </article>
+            
+        </div>
+    </main>
 </body>
 </html>
