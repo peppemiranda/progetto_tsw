@@ -54,5 +54,14 @@
                             </c:forEach>
                         </tbody>
                     </table>
+                    
+                    </c:when>
+                <c:otherwise>
+                    <p class="messaggio-vuoto">Nessun ordine presente al momento nel database.</p>
+                </c:otherwise>
+            </c:choose>
+        </section>
+
+    </main>
 </body>
 </html>
