@@ -68,7 +68,7 @@ public class LoginServlet extends HttpServlet {
             
         } catch (java.sql.SQLException e) {
             e.printStackTrace(); 	// Errore interno del database
-            response.sendRedirect("errore.jsp");
+            request.getRequestDispatcher("/WEB-INF/views/common/errore.jsp").forward(request, response);
         }
 	}
 

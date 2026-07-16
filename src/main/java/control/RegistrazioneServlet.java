@@ -70,7 +70,16 @@ public class RegistrazioneServlet extends HttpServlet {
             
         } catch (java.sql.SQLException e) {
             e.printStackTrace(); 	// In caso di errore nel DB, stampiamo il problema nella console
-            response.sendRedirect("errore.jsp"); 	// E deviamo l'utente su una pagina di errore
+            
+            //Se l'errore SQL è un duplicato (codice 1062) rimanda alla JSP col messaggio "Email esistente"
+            if (e.getErrorCode() == 1062) {
+                response.sendRedirect("RegistrazioneServlet?errore=email_esistente");
+            } else {
+            	
+                // Altrimenti, per tutti gli altri crash(come abbiamo fatto in tutte
+            	// le altre Servlet), facciamo il forward sicuro alla pagina di errore
+                request.getRequestDispatcher("/WEB-INF/views/common/errore.jsp").forward(request, response);
+            }
         }
         
 	}

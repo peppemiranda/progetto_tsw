@@ -45,7 +45,7 @@ public class CatalogoServlet extends HttpServlet {
 
         } catch (java.sql.SQLException e) {
             e.printStackTrace(); 	//Errore di connessione
-            response.sendRedirect("errore.jsp");
+            request.getRequestDispatcher("/WEB-INF/views/common/errore.jsp").forward(request, response);
         }
 	}
 

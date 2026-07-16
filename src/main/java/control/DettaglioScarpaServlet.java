@@ -53,23 +53,21 @@ public class DettaglioScarpaServlet extends HttpServlet {
                     
                 } else {	//La scarpa NON è presente nel database
               
-                    response.sendRedirect("catalogo.jsp");	//Rimandiamo l'utente al catalogo
+                    response.sendRedirect("CatalogoServlet");	//Rimandiamo l'utente al Controller del catalogo
                 }
 
             } catch (NumberFormatException e) {
             	
-                // SICUREZZA:se un hacker scrive "dettaglio?id=pippo" invece di un numero
-                // Integer.parseInt andrebbe in "crash"; questo blocco catch cattura l'errore e lo salva
-                response.sendRedirect("catalogo.jsp");
+            	//Rimandiamo l'utente al Controller del catalogo
+                response.sendRedirect("CatalogoServlet");
                 
             } catch (java.sql.SQLException e) {
                 e.printStackTrace();	 // Errore di connessione a MySQL
-                response.sendRedirect("errore.jsp");
+                request.getRequestDispatcher("/WEB-INF/views/common/errore.jsp").forward(request, response);
             }
             
         } else {
-            // Se manca proprio il parametro ID (es. l'utente ha digitato l'URL a mano sbagliando)
-            response.sendRedirect("catalogo.jsp");
+            response.sendRedirect("CatalogoServlet");
         }
         
 	}

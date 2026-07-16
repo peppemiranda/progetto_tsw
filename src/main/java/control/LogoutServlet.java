@@ -36,8 +36,8 @@ public class LogoutServlet extends HttpServlet {
             session.invalidate();
         }
         
-        //Rispediamo l'utente alla home page del sito(come ospite anonimo)
-        response.sendRedirect("index.jsp");
+        //Rispediamo l'utente al Controller del catalogo(home)
+        response.sendRedirect("CatalogoServlet");
 	}
 
 	/**

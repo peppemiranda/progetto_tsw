@@ -32,9 +32,9 @@ public class StoricoOrdiniServlet extends HttpServlet {
         jakarta.servlet.http.HttpSession session = request.getSession();
         model.UtenteRegistrato utente = (model.UtenteRegistrato) session.getAttribute("utenteLoggato");
         
-        //Se l'utente NON è loggato, lo rispediamo alla pagina di login
+        //Se l'utente NON è loggato, lo rispediamo al Controller di login
         if (utente == null) {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("LoginServlet");
             return;  //Fermiamo l'esecuzione
         }
 
@@ -49,13 +49,13 @@ public class StoricoOrdiniServlet extends HttpServlet {
             //Mettiamo la lista nella request con l'etichetta "listaOrdini"
             request.setAttribute("listaOrdini", mieiOrdini);
 
-            // (Con RequestDispatcher) mandiamo l'utente a storico.jsp
-            jakarta.servlet.RequestDispatcher dispatcher = request.getRequestDispatcher("storico.jsp");
+            //mandiamo l'utente allo storico
+            jakarta.servlet.RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/common/storico.jsp");
             dispatcher.forward(request, response);
 
         } catch (java.sql.SQLException e) {
             e.printStackTrace(); // Se MySQL da "problemi", stampiamo l'errore in console
-            response.sendRedirect("errore.jsp");
+            request.getRequestDispatcher("/WEB-INF/views/common/errore.jsp").forward(request, response);
         }
 	}
 
