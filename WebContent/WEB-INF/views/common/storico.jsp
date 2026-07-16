@@ -52,6 +52,17 @@
                         </tr>
                     </c:forEach>
                 </table>
+                
+                </c:when>
+            <c:otherwise>
+                <p>Non hai ancora effettuato nessun ordine.</p>
+            </c:otherwise>
+        </c:choose>
+        
+        <form action="CatalogoServlet" method="GET" class="form-spaziato">
+            <button type="submit" class="bottone-verde">Torna al Catalogo</button>
+        </form>
+    </main>
 
 </body>
 </html>
