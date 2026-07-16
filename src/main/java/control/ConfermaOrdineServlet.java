@@ -56,6 +56,19 @@ public class ConfermaOrdineServlet extends HttpServlet {
             response.sendRedirect("CatalogoServlet");
             return;
         }
+        
+        //Ci prendiamo i parametri inseriti dall'utente nel form di checkout
+        String indirizzo = request.getParameter("indirizzo");
+        String citta = request.getParameter("citta");
+        String carta = request.getParameter("carta");
+        
+        //Validazione di sicurezza lato server: se i campi obbligatori sono vuoti rimandiamo l'utente indietro
+        if (indirizzo == null || indirizzo.trim().isEmpty() ||
+            citta == null || citta.trim().isEmpty() ||
+            carta == null || carta.trim().isEmpty()) {
+            response.sendRedirect("CheckoutServlet?errore=campi_vuoti");
+            return;
+        }
 	}
 
 }
