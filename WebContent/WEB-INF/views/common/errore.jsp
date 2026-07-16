@@ -18,6 +18,18 @@
             <a href="CatalogoServlet" class="titolo-sito">PianetaCalcio</a>
         </nav>
     </header>
+    
+    <main class="contenitore-principale">
+        <h1 style="color: red; margin-bottom: 20px;">Ops! Qualcosa è andato storto.</h1>
+        <p style="font-size: 18px; margin-bottom: 30px;">
+            Si è verificato un errore tecnico temporaneo (probabilmente di connessione al server o al database).<br>
+            Non preoccuparti, il tuo carrello e i tuoi dati sono al sicuro.
+        </p>
+        
+        <form action="CatalogoServlet" method="GET">
+            <button type="submit" class="bottone-verde">Torna alla Home</button>
+        </form>
+    </main>
 
 </body>
 </html>
