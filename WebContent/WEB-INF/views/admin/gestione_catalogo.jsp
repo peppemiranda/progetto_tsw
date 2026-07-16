@@ -78,6 +78,56 @@
                 </button>
             </form>
         </section>
+        
+        <!--La tabella del catalogo  attuale -->
+        
+        <section class="sezione-tabella-admin">
+            <h3>Catalogo Attuale</h3>
+            <table class="tabella-admin">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Foto</th>
+                        <th>Marca e Modello</th>
+                        <th>Terreno</th>
+                        <th>Prezzo</th>
+                        <th>Q.tà</th>
+                        <th>Azioni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="s" items="${listaScarpe}">
+                        <tr>
+                            <td>${s.idScarpa}</td>
+                            <td><img src="${s.immagine}" alt="Foto" class="img-tabella-admin"></td>
+                            <td>${s.marca} ${s.modello}</td>
+                            <td>${s.terreno}</td>
+                            <td>€ ${s.prezzoAttuale}</td>
+                            <td>${s.pezziMagazzino}</td>
+                            <td>
+                                <!-- Bottone Modifica -->
+                                
+                                <form action="AdminServlet" method="GET" class="form-inline">
+                                    <input type="hidden" name="azione" value="gestioneCatalogo">
+                                    <input type="hidden" name="idModifica" value="${s.idScarpa}">
+                                    <button type="submit" class="btn-modifica">Modifica</button>
+                                </form>
+                                
+                                <!-- Bottone Elimina -->
+                                
+                                <form action="AdminServlet" method="POST" class="form-inline">
+                                    <input type="hidden" name="operazione" value="elimina">
+                                    <input type="hidden" name="idScarpa" value="${s.idScarpa}">
+                                    <button type="submit" class="btn-elimina" onclick="return confirm('Sicuro di voler eliminare questa scarpa?');">Elimina</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
 
 </body>
 </html>
