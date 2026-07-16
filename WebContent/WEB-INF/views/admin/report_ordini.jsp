@@ -27,6 +27,32 @@
             </div>
         </nav>
     </header>
+    
+    <main class="contenitore-principale">
+        <h2 class="titolo-form">Storico Ordini Clienti</h2>
 
+        <section class="sezione-tabella-admin">
+            <c:choose>
+                <c:when test="${not empty listaOrdini}">
+                    <table class="tabella-admin">
+                        <thead>
+                            <tr>
+                                <th>ID Ordine</th>
+                                <th>ID Cliente</th>
+                                <th>Data Acquisto</th>
+                                <th>Totale Ordine</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="ordine" items="${listaOrdini}">
+                                <tr>
+                                    <td>#${ordine.idOrdine}</td>
+                                    <td>Utente ID: ${ordine.idUtente}</td>
+                                    <td>${ordine.dataAcquisto}</td>
+                                    <td>€ ${ordine.totaleOrdine}</td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
 </body>
 </html>
