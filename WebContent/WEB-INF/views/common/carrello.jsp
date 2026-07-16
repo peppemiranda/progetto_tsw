@@ -5,11 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
 <title>Il tuo Carrello - PianetaCalcio</title>
-
 <link rel="stylesheet" type="text/css" href="styles/style.css">
-
 </head>
 <body>
 
@@ -20,24 +17,33 @@
     <main class="contenitore-principale">
         <h2>Il tuo Carrello</h2>
         <c:choose>
-            <c:when test="${not empty carrello}">
+            <c:when test="${not empty sessionScope.carrello}">
                 <table>
                     <tr><th>Modello</th><th>Marca</th><th>Prezzo</th><th>Azione</th></tr>
-                    <c:forEach var="scarpa" items="${carrello}">
+                    <c:forEach var="scarpa" items="${sessionScope.carrello}">
                         <tr>
                             <td><c:out value="${scarpa.modello}" /></td>
                             <td><c:out value="${scarpa.marca}" /></td>
                             <td>€ <c:out value="${scarpa.prezzoAttuale}" /></td>
-                            <td><a href="CarrelloServlet?azione=rimuovi&id=${scarpa.idScarpa}">Rimuovi</a></td>
+                            <td>
+                                <form action="CarrelloServlet" method="POST" style="display:inline;">
+                                    <input type="hidden" name="azione" value="rimuovi">
+                                    <input type="hidden" name="id" value="${scarpa.idScarpa}">
+                                    <button type="submit" style="background: none; border: none; color: red; text-decoration: underline; cursor: pointer; font-size: 16px;">Rimuovi</button>
+                                </form>
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>
                 
-                <a href="CarrelloServlet?azione=svuota">Svuota tutto</a>
+                <form action="CarrelloServlet" method="POST" style="margin-top: 15px; margin-bottom: 15px;">
+                    <input type="hidden" name="azione" value="svuota">
+                    <button type="submit" style="background: none; border: none; color: red; text-decoration: underline; cursor: pointer; font-size: 16px;">Svuota tutto</button>
+                </form>
                 
-             <form action="CheckoutServlet" method="GET">
+                <form action="CheckoutServlet" method="GET">
     				<button type="submit" class="bottone-verde">Procedi all'acquisto</button>
-			</form>
+			    </form>
 			
             </c:when>
             <c:otherwise>
