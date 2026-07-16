@@ -58,5 +58,23 @@ public class ScarpaDAODataSource implements ScarpaDAO {
         }
         return catalogo;
     }
+	
+	//Salvare una nuova scarpa
+    @Override
+    public void doSave(Scarpa scarpa) throws SQLException {
+        String query = "INSERT INTO Scarpa (Marca, Modello, Terreno, Prezzo_Attuale, Pezzi_Magazzino) VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+            
+            ps.setString(1, scarpa.getMarca());
+            ps.setString(2, scarpa.getModello());
+            ps.setString(3, scarpa.getTerreno() != null ? scarpa.getTerreno() : "FG"); // allback a FG se nullo
+            ps.setDouble(4, scarpa.getPrezzoAttuale());
+            ps.setInt(5, scarpa.getPezziMagazzino() > 0 ? scarpa.getPezziMagazzino() : 10); //Default 10 pezzi se non specificato
+            
+            ps.executeUpdate();
+        }
+    }
 
 }
