@@ -63,6 +63,12 @@
             <button type="submit" class="bottone-verde">Torna al Catalogo</button>
         </form>
     </main>
-
+    
+    <footer class="footer-sito">
+        <div class="contenitore-footer">
+            <span class="link-footer"><a href="#">Contatti</a></span>
+        </div>
+    </footer>
+    
 </body>
 </html>
