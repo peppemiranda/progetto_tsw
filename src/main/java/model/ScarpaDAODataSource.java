@@ -76,5 +76,24 @@ public class ScarpaDAODataSource implements ScarpaDAO {
             ps.executeUpdate();
         }
     }
+    
+    //Aggiornare i dati di una scarpa già esistente
+    @Override
+    public void doUpdate(Scarpa scarpa) throws SQLException {
+        String query = "UPDATE Scarpa SET Marca = ?, Modello = ?, Terreno = ?, Prezzo_Attuale = ?, Pezzi_Magazzino = ? WHERE ID_Scarpa = ?";
+
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+            
+            ps.setString(1, scarpa.getMarca());
+            ps.setString(2, scarpa.getModello());
+            ps.setString(3, scarpa.getTerreno() != null ? scarpa.getTerreno() : "FG");
+            ps.setDouble(4, scarpa.getPrezzoAttuale());
+            ps.setInt(5, scarpa.getPezziMagazzino());
+            ps.setInt(6, scarpa.getIdScarpa());
+            
+            ps.executeUpdate();
+        }
+    }
 
 }
