@@ -36,7 +36,7 @@ public class CheckoutServlet extends HttpServlet {
         
         //Se l'utente è null (non ha fatto il login), lo mandiamo alla pagina di login
         if (utente == null) {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("LoginServlet");
             return; //Ferma l'esecuzione del codice
         }
         
@@ -46,53 +46,13 @@ public class CheckoutServlet extends HttpServlet {
         
         // Se il carrello non esiste o è vuoto, rimandiamo l'utente al catalogo
         if (carrello == null || carrello.isEmpty()) {
-            response.sendRedirect("catalogo.jsp");
+            response.sendRedirect("CatalogoServlet");
             return;
         }
         
-        try {
-            //Calcoliamo il totale da pagare scorrendo tutte le scarpe nel carrello
-            double totale = 0;
-            for (model.Scarpa scarpa : carrello) {
-                totale += scarpa.getPrezzoAttuale();
-            }
-            
-            //Creiamo l'oggetto dell'ordine e chiamiamo il suo DAO
-            model.Ordine nuovoOrdine = new model.Ordine();
-            nuovoOrdine.setIdUtente(utente.getIdUtente()); 	//Colleghiamo l'ordine al cliente
-            nuovoOrdine.setTotaleOrdine(totale);
-            
-            model.OrdineDAODataSource ordineDao = new model.OrdineDAODataSource();
-            
-            //Salviamo l'ordine, e MySQL mette automaticamente l'ID
-            ordineDao.doSave(nuovoOrdine); 
-
-            //Salviamo i dettagli, e chiamiamo il DAO per la composizione(ComposizioneOrdine, le singole scarpe)
-            model.ComposizioneOrdineDAODataSource compDao = new model.ComposizioneOrdineDAODataSource();
-            
-            //Facciamo un ciclo: per ogni scarpa nel carrello, salviamo una riga nel database
-            for (model.Scarpa scarpa : carrello) {
-                model.ComposizioneOrdine dettaglio = new model.ComposizioneOrdine();
-                dettaglio.setIdOrdine(nuovoOrdine.getIdOrdine()); //Usiamo l'ID generato prima
-                dettaglio.setIdScarpa(scarpa.getIdScarpa());
-                dettaglio.setPrezzoAcquisto(scarpa.getPrezzoAttuale());
-                dettaglio.setQuantitaScelta(1); //Per semplicità ogni click nel carrello è 1 quantità
-                
-                compDao.doSave(dettaglio);
-            }
- 
-            //Svuotiamo il carrello provvisorio
-            carrello.clear();
-            
-            //Mandiamo l'utente verso la pagina home
-            response.sendRedirect("index.jsp");
-
-        } catch (java.sql.SQLException e) {
-        	
-            // Se MySQL va in crash proprio mentre salva, intercettiamo
-            e.printStackTrace();
-            response.sendRedirect("errore.jsp");
-        }
+        // Se l'utente è loggato e il carrello ha elementi, facciamo un forward
+        // alla JSP protetta in WEB-INF
+        request.getRequestDispatcher("/WEB-INF/views/common/checkout.jsp").forward(request, response);
 	}
 
 	/**

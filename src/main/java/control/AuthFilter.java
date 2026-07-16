@@ -11,8 +11,10 @@ import java.io.IOException;
 
 
 //L'annotazione dice a Tomcat quali pagine specifiche deve "controllare" questo Filtro
-@WebFilter(urlPatterns = {"/storico.jsp", "/CheckoutServlet", "/StoricoOrdiniServlet", "/carrello.jsp"})
+@WebFilter(urlPatterns = {"/CheckoutServlet","/ConfermaOrdineServlet" , "/StoricoOrdiniServlet"})
 public class AuthFilter extends HttpFilter {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Override
 	protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
@@ -33,7 +35,7 @@ public class AuthFilter extends HttpFilter {
             
         } else {  //Se l'utente NON è loggato
         
-            response.sendRedirect("login.jsp");	// Lo blocchiamo e lo rispediamo a fare il login
+            response.sendRedirect("LoginServlet");	// Lo blocchiamo e lo rispediamo a fare il login
         }
     }
 }
