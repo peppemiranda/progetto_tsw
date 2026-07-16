@@ -6,9 +6,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.Scarpa;
 import model.UtenteRegistrato;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Servlet implementation class ConfermaOrdineServlet
@@ -45,6 +47,13 @@ public class ConfermaOrdineServlet extends HttpServlet {
         UtenteRegistrato utente = (UtenteRegistrato) session.getAttribute("utenteLoggato");
         if (utente == null) {
             response.sendRedirect("LoginServlet");
+            return;
+        }
+        
+        //Verifichiamo che il carrello non sia vuoto
+        ArrayList<Scarpa> carrello = (ArrayList<Scarpa>) session.getAttribute("carrello");
+        if (carrello == null || carrello.isEmpty()) {
+            response.sendRedirect("CatalogoServlet");
             return;
         }
 	}
