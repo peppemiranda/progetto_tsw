@@ -101,6 +101,18 @@ public class ConfermaOrdineServlet extends HttpServlet {
                 
                 compDao.doSave(dettaglio);	//Salviamo il tutto
             }
+            
+            //Appena l'utente completa l'acquisto svuotiamo il carrello
+            carrello.clear();
+            
+            //Rimandiamo l'utente Controller del catalogo
+            response.sendRedirect("CatalogoServlet?acquisto=successo");
+
+        } catch (java.sql.SQLException e) {
+            e.printStackTrace();
+            //Errore SQL: facciamo un forward alla pagina di errore (protetta in WEB-INF)
+            request.getRequestDispatcher("/WEB-INF/views/common/errore.jsp").forward(request, response);
+        }
                    
 	}
 
