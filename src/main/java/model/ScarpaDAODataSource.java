@@ -95,5 +95,18 @@ public class ScarpaDAODataSource implements ScarpaDAO {
             ps.executeUpdate();
         }
     }
+    
+    //Eliminare una scarpa dal catalogo
+    @Override
+    public void doDelete(int idScarpa) throws SQLException {
+        String query = "DELETE FROM Scarpa WHERE ID_Scarpa = ?";
+
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+            
+            ps.setInt(1, idScarpa);
+            ps.executeUpdate();
+        }
+    }
 
 }
