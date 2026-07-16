@@ -293,6 +293,19 @@ body {
 	margin-bottom: 30px;
 }
 
+/* Tabella Storico Ordini */
+
+.tabella-ordini {
+    width: 100%;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.tabella-ordini th, .tabella-ordini td {
+    padding: 10px;
+    border-bottom: 1px solid #cccccc;
+}
+
 /* MEDIA QUERIES */
 @media screen and (max-width: 800px) {	/* Se lo schermo è più piccolo di 800px si eseguono le seguenti regole per 
 	"contenitore-form" e "input-testo" (esempio, la larghezza è più ampia suli schermi più piccoli) */
