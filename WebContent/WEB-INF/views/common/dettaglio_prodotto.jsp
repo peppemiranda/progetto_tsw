@@ -20,7 +20,7 @@
     
     <main class="contenitore-principale">
         <article class="dettaglio-prodotto">
-            <img src="images/default.png" alt="<c:out value='${scarpa.modello}' />" class="immagine-dettaglio">
+            <img src="${scarpa.immagine}" alt="<c:out value='${scarpa.modello}' />" class="immagine-dettaglio">
             <h1><c:out value="${scarpa.modello}" /></h1>
             <p>Marca: <c:out value="${scarpa.marca}" /></p>
             <p>Prezzo: € <c:out value="${scarpa.prezzoAttuale}" /></p>
