@@ -34,6 +34,24 @@
             </div>
         </nav>
     </header>
+    
+    <main class="contenitore-principale">
+        <h2>Il tuo Storico Ordini</h2>
+        
+        <c:choose>
+            <c:when test="${not empty listaOrdini}">
+                <table class="tabella-ordini">
+                    <tr>
+                        <th>Numero Ordine</th>
+                        <th>Totale Pagato</th>
+                    </tr>
+                    <c:forEach var="ordine" items="${listaOrdini}">
+                        <tr>
+                            <td><c:out value="${ordine.idOrdine}" /></td>
+                            <td>€ <c:out value="${ordine.totaleOrdine}" /></td>
+                        </tr>
+                    </c:forEach>
+                </table>
 
 </body>
 </html>
