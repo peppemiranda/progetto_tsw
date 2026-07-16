@@ -6,6 +6,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.ComposizioneOrdine;
+import model.ComposizioneOrdineDAODataSource;
+import model.Ordine;
+import model.OrdineDAODataSource;
 import model.Scarpa;
 import model.UtenteRegistrato;
 
@@ -69,6 +73,35 @@ public class ConfermaOrdineServlet extends HttpServlet {
             response.sendRedirect("CheckoutServlet?errore=campi_vuoti");
             return;
         }
+        
+        try {
+            //Calcoliamo il totale dell'ordine scorrendo le scarpe nel carrello
+            double totale = 0;
+            for (Scarpa scarpa : carrello) {
+                totale += scarpa.getPrezzoAttuale();
+            }
+            
+            //Creiamo l'oggetto Ordine
+            Ordine nuovoOrdine = new Ordine();
+            nuovoOrdine.setIdUtente(utente.getIdUtente()); // Colleghiamo l'ordine al cliente registrato
+            nuovoOrdine.setTotaleOrdine(totale);
+            
+            //Chiamiamo il DAO e salviamo l'ordine
+            OrdineDAODataSource ordineDao = new OrdineDAODataSource();
+            ordineDao.doSave(nuovoOrdine); 
+
+            //Salviamo le singole righe dell'ordine con Composizione_Ordine
+            ComposizioneOrdineDAODataSource compDao = new ComposizioneOrdineDAODataSource();
+            for (Scarpa scarpa : carrello) {
+                ComposizioneOrdine dettaglio = new ComposizioneOrdine();
+                dettaglio.setIdOrdine(nuovoOrdine.getIdOrdine()); //ID recuperato dopo l'inserimento
+                dettaglio.setIdScarpa(scarpa.getIdScarpa());
+                dettaglio.setPrezzoAcquisto(scarpa.getPrezzoAttuale());
+                dettaglio.setQuantitaScelta(1); 	//Manteniamo 1 quantita fissa
+                
+                compDao.doSave(dettaglio);	//Salviamo il tutto
+            }
+                   
 	}
 
 }
