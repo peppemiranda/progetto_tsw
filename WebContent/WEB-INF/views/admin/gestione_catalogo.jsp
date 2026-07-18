@@ -99,22 +99,22 @@
                     <c:forEach var="s" items="${listaScarpe}">
                         <tr>
                             <td>${s.idScarpa}</td>
-                            <img src="${pageContext.request.contextPath}/${scarpa.immagine}" alt="<c:out value='${scarpa.modello}' />" class="immagine-dettaglio">
+                            <td><img src="${pageContext.request.contextPath}/${s.immagine}" alt="Foto" class="img-tabella-admin"></td>
                             <td>${s.marca} ${s.modello}</td>
                             <td>${s.terreno}</td>
                             <td>€ ${s.prezzoAttuale}</td>
-                            <td>${s.pezziMagazzino}</td>
+                            <td>${s.pezziMagazzino}</td> <!-- Qui finisce la Q.tà -->
+                            
+                            <!-- I bottoni devono stare in QUESTO TD, l'ultimo -->
                             <td>
                                 <!-- Bottone Modifica -->
-                                
                                 <form action="AdminServlet" method="GET" class="form-inline">
                                     <input type="hidden" name="azione" value="gestioneCatalogo">
                                     <input type="hidden" name="idModifica" value="${s.idScarpa}">
                                     <button type="submit" class="btn-modifica">Modifica</button>
                                 </form>
-                                
+                                 
                                 <!-- Bottone Elimina -->
-                                
                                 <form action="AdminServlet" method="POST" class="form-inline">
                                     <input type="hidden" name="operazione" value="elimina">
                                     <input type="hidden" name="idScarpa" value="${s.idScarpa}">
