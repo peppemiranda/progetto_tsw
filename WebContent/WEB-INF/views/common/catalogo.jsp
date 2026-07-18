@@ -62,8 +62,8 @@
                 </div>
                 <div class="gruppo-filtro">
                     <h4 class="nome-filtro">Terreno</h4>
-                    <label><input type="checkbox" name="terreno" value="FG"> FG (Compatto)</label><br>
-                    <label><input type="checkbox" name="terreno" value="SG"> SG (Morbido)</label>
+                    <label><input type="checkbox" name="terreno" value="AG">AG</label><br>
+                    <label><input type="checkbox" name="terreno" value="TF">TF</label>
                 </div>
                 <button type="submit" class="bottone-verde">Applica Filtri</button>
             </form>
@@ -76,8 +76,7 @@
                         <c:forEach var="scarpa" items="${listaScarpe}">
                             <article class="scheda-prodotto">
                                 <a href="DettaglioScarpaServlet?id=${scarpa.idScarpa}" class="link-neutro">
-                                    <!-- RIGA MODIFICATA: ORA LEGGE L'IMMAGINE DINAMICA DAL DATABASE -->
-                                    <img src="${scarpa.immagine}" alt="<c:out value='${scarpa.modello}' />" class="immagine-scarpa">
+                                   <img src="${pageContext.request.contextPath}/${scarpa.immagine}" alt="<c:out value='${scarpa.modello}' />" class="immagine-scarpa">
                                     <h4 class="nome-prodotto"><c:out value="${scarpa.modello}" /></h4>
                                     <p class="prezzo-prodotto">€ <c:out value="${scarpa.prezzoAttuale}" /></p>
                                 </a>

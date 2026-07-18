@@ -96,6 +96,7 @@ public class AdminServlet extends HttpServlet {
                 nuova.setTerreno(request.getParameter("terreno"));
                 nuova.setPrezzoAttuale(Double.parseDouble(request.getParameter("prezzo")));
                 nuova.setPezziMagazzino(Integer.parseInt(request.getParameter("pezziMagazzino")));
+                nuova.setImmagine(request.getParameter("immagine"));
 
                 scarpaDAO.doSave(nuova);
                 response.sendRedirect("AdminServlet?azione=gestioneCatalogo");

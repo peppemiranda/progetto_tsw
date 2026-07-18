@@ -75,6 +75,8 @@ public class OrdineDAODataSource implements OrdineDAO {
                 ordine.setIdOrdine(rs.getInt("ID_Ordine"));
                 ordine.setIdUtente(rs.getInt("ID_Utente"));
                 ordine.setTotaleOrdine(rs.getDouble("Totale_Ordine"));
+                ordine.setDataAcquisto(rs.getDate("Data_Acquisto"));
+                
                 ordini.add(ordine);
             }
         }
