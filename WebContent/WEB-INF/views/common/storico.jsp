@@ -28,9 +28,23 @@
                     <img src="images/carrello.png" alt="Carrello" class="immagine-icona-carrello"> 
                     Cart: <c:out value="${not empty sessionScope.carrello ? sessionScope.carrello.size() : 0}" />
                 </a>
-                <span class="utente-loggato">
-                    Benvenuto, <c:out value="${sessionScope.utenteLoggato.nome}" default="Ospite" />!
-                </span>
+
+                <c:choose>
+                    <c:when test="${not empty sessionScope.utenteLoggato}">
+                        <span class="utente-loggato">Benvenuto, <c:out value="${sessionScope.utenteLoggato.nome}" />!</span>
+                        
+                        <%-- Se è Admin, mostriamo il tasto Dashboard --%>
+                        <c:if test="${sessionScope.utenteLoggato.ruolo == 'Admin'}">
+                            <a href="AdminServlet" class="link-accesso" style="color: #ff9800; font-weight: bold; margin-left: 10px;">Area Admin</a>
+                        </c:if>
+                        
+                        <a href="LogoutServlet" class="link-accesso" style="margin-left: 10px;">Logout</a>
+                    </c:when>
+                    <c:otherwise>
+                        <span class="utente-loggato">Benvenuto, Ospite!</span>
+                        <a href="LoginServlet" class="link-accesso">Accedi / Registrati</a>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </nav>
     </header>

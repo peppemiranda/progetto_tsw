@@ -99,7 +99,7 @@
                     <c:forEach var="s" items="${listaScarpe}">
                         <tr>
                             <td>${s.idScarpa}</td>
-                            <td><img src="${s.immagine}" alt="Foto" class="img-tabella-admin"></td>
+                            <td><img src="${pageContext.request.contextPath}/${s.immagine}" alt="Foto" class="img-tabella-admin"></td>
                             <td>${s.marca} ${s.modello}</td>
                             <td>${s.terreno}</td>
                             <td>€ ${s.prezzoAttuale}</td>
