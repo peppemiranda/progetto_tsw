@@ -54,7 +54,7 @@
                 </div>
                 
                 <div class="gruppo-input">
-                    <label>Terreno (es. FG, SG, TF):</label>
+                    <label>Terreno:</label>
                     <input type="text" name="terreno" value="${scarpaDaModificare.terreno}" required>
                 </div>
                 
@@ -69,7 +69,7 @@
                 </div>
                 
                 <div class="gruppo-input">
-                    <label>Percorso Immagine (es. images/scarpe/1.png):</label>
+                    <label>Percorso Immagine:</label>
                     <input type="text" name="immagine" value="${scarpaDaModificare.immagine}" required>
                 </div>
 
