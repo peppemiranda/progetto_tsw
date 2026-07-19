@@ -112,5 +112,23 @@ public class ScarpaDAODataSource implements ScarpaDAO {
             ps.executeUpdate();
         }
     }
+    
+    @Override
+    public Collection<Scarpa> doRetrieveByFilter(String marca, String terreno) throws SQLException {
+        String query = "SELECT * FROM Scarpa WHERE 1=1";
+        
+        if (marca != null && !marca.isEmpty()) {
+            query += " AND Marca IN (?)";
+        }
+        if (terreno != null && !terreno.isEmpty()) {
+            query += " AND Terreno = ?";
+        }
+        
+        Collection<Scarpa> catalogo = new LinkedList<>();
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+        }
+        return catalogo;
+    }
 
 }
