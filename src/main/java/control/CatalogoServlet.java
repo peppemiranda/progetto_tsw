@@ -26,27 +26,48 @@ public class CatalogoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		// Chiamiamo il DAO, per le scarpe
-        model.ScarpaDAODataSource dao = new model.ScarpaDAODataSource();
-        
-       
-        try {
-        	
-     // Ordiniamo al DAO di estrarre TUTTO il catalogo da MySQL (usiamo la Collection, il metodo della classe ScarpaDAODataSource)
-            java.util.Collection<model.Scarpa> catalogo = dao.doRetrieveAll();
+		model.ScarpaDAODataSource dao = new model.ScarpaDAODataSource();
+	    String azione = request.getParameter("azione");
 
-            // Attacchiamo il catalogo alla richiesta(request) per farlo viaggiare verso la pagina web
-            request.setAttribute("listaScarpe", catalogo);
-
-            // Con RequestDispatcher passiamo tutto alla pagina HTML/JSP.
-            jakarta.servlet.RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/common/catalogo.jsp");
-            dispatcher.forward(request, response);
-
-        } catch (java.sql.SQLException e) {
-            e.printStackTrace(); 	//Errore di connessione
-            request.getRequestDispatcher("/WEB-INF/views/common/errore.jsp").forward(request, response);
-        }
+	    try {
+	        if ("filtra".equalsIgnoreCase(azione)) {
+	            // LOGICA AJAX
+	            String marca = request.getParameter("marca");
+	            String terreno = request.getParameter("terreno");
+	            
+	            java.util.Collection<model.Scarpa> catalogo = dao.doRetrieveByFilter(marca, terreno);
+	            
+	            // Costruzione manuale del JSON (o usa una libreria come GSON/org.json)
+	            response.setContentType("application/json");
+	            response.setCharacterEncoding("UTF-8");
+	            java.io.PrintWriter out = response.getWriter();
+	            
+	            StringBuilder json = new StringBuilder("[");
+	            int count = 0;
+	            for (model.Scarpa s : catalogo) {
+	                json.append("{")
+	                    .append("\"idScarpa\":").append(s.getIdScarpa()).append(",")
+	                    .append("\"modello\":\"").append(s.getModello()).append("\",")
+	                    .append("\"prezzoAttuale\":").append(s.getPrezzoAttuale()).append(",")
+	                    .append("\"immagine\":\"").append(s.getImmagine()).append("\"")
+	                    .append("}");
+	                if (++count < catalogo.size()) json.append(",");
+	            }
+	            json.append("]");
+	            
+	            out.print(json.toString());
+	            out.flush();
+	        } else {
+	            // LOGICA CLASSICA (Caricamento pagina)
+	            java.util.Collection<model.Scarpa> catalogo = dao.doRetrieveAll();
+	            request.setAttribute("listaScarpe", catalogo);
+	            jakarta.servlet.RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/common/catalogo.jsp");
+	            dispatcher.forward(request, response);
+	        }
+	    } catch (java.sql.SQLException e) {
+	        e.printStackTrace();
+	        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+	    }
 	}
 
 	/**
