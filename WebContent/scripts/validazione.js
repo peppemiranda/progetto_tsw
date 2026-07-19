@@ -1,5 +1,7 @@
 
-const patternNome = /^[A-Za-z]+$/; 
+const patternNome = /^[A-Za-z]+$/;
+const patternEmail = /^\S+@\S+\.\S+$/;
+const patternTelefono = /^([0-9]{3}-[0-9]{7})$/;
 
 function validateFormElem(formElem, pattern, span, errorMessage) {
     if (formElem.value.match(pattern)) {
@@ -13,4 +15,17 @@ function validateFormElem(formElem, pattern, span, errorMessage) {
         span.style.color = "red";
         return false;
     }
+}
+
+// Funzione di utilità per il submit finale
+function validaRegistrazione(form) {
+    let valid = true;
+    
+    // Esempio: valida Nome
+    if (!validateFormElem(form.nome, patternNome, document.getElementById("errorNome"), "Solo lettere")) {
+        valid = false;
+    }
+    // Aggiungi qui gli altri campi (email, password, ecc.)
+    
+    return valid; // Se è false, il form non viene inviato
 }

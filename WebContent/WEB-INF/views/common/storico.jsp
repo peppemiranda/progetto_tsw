@@ -35,10 +35,10 @@
                         
                         <%-- Se è Admin, mostriamo il tasto Dashboard --%>
                         <c:if test="${sessionScope.utenteLoggato.ruolo == 'Admin'}">
-                            <a href="AdminServlet" class="link-accesso" style="color: #ff9800; font-weight: bold; margin-left: 10px;">Area Admin</a>
+                            <a href="AdminServlet" class="link-accesso link-admin">Area Admin</a>
                         </c:if>
                         
-                        <a href="LogoutServlet" class="link-accesso" style="margin-left: 10px;">Logout</a>
+                        <a href="LogoutServlet" class="link-accesso link-logout">Logout</a>
                     </c:when>
                     <c:otherwise>
                         <span class="utente-loggato">Benvenuto, Ospite!</span>

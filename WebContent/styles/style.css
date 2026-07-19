@@ -393,6 +393,28 @@ body {
 }
 
 
+
+
+.link-admin {
+    color: #ff9800 !important;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.link-logout {
+    margin-left: 10px;
+}
+
+
+.form-aggiungi-carrello {
+    margin-top: 10px;
+}
+
+
+
+
+
+
 /* MEDIA QUERIES */
 @media screen and (max-width: 800px) {	/* Se lo schermo è più piccolo di 800px si eseguono le seguenti regole per 
 	"contenitore-form" e "input-testo" (esempio, la larghezza è più ampia suli schermi più piccoli) */

@@ -12,7 +12,7 @@ public interface ScarpaDAO {
     Collection<Scarpa> doRetrieveAll() throws SQLException;
     
     //Metodo per l'implementazione di Ajax
-    Collection<Scarpa> doRetrieveByFilter(String marca, String terreno) throws SQLException;
+    Collection<Scarpa> doRetrieveByFilter(String marca, String terreno, String q) throws SQLException;
     
     //Metodi per l'admin
     void doSave(Scarpa scarpa) throws SQLException;

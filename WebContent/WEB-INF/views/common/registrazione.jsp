@@ -61,6 +61,6 @@
             <span class="link-footer"><a href="#">Contatti</a></span>
         </div>
     </footer>
-
+	<script src="${pageContext.request.contextPath}/scripts/validazione.js"></script>
 </body>
 </html>

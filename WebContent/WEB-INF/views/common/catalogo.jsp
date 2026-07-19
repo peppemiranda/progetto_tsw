@@ -33,10 +33,10 @@
                         
                         <%-- Se è Admin, mostriamo il tasto Dashboard --%>
                         <c:if test="${sessionScope.utenteLoggato.ruolo == 'Admin'}">
-                            <a href="AdminServlet" class="link-accesso" style="color: #ff9800; font-weight: bold; margin-left: 10px;">Area Admin</a>
+                            <a href="AdminServlet" class="link-accesso link-admin">Area Admin</a>
                         </c:if>
                         
-                        <a href="LogoutServlet" class="link-accesso" style="margin-left: 10px;">Logout</a>
+                        <a href="LogoutServlet" class="link-accesso link-logout">Logout</a>
                     </c:when>
                     <c:otherwise>
                         <span class="utente-loggato">Benvenuto, Ospite!</span>
@@ -82,8 +82,8 @@
                                     <p class="prezzo-prodotto">€ <c:out value="${scarpa.prezzoAttuale}" /></p>
                                 </a>
                                 
-                             <c:if test="${empty sessionScope.utenteLoggato or sessionScope.utenteLoggato.ruolo != 'Admin'}">
-    	<form action="CarrelloServlet" method="POST" style="margin-top: 10px;">
+                         <c:if test="${empty sessionScope.utenteLoggato or sessionScope.utenteLoggato.ruolo != 'Admin'}">
+    	<form action="CarrelloServlet" method="POST" class="form-aggiungi-carrello">
         	<input type="hidden" name="azione" value="aggiungi">
         	<input type="hidden" name="id" value="${scarpa.idScarpa}">
         	<button type="submit" class="bottone-verde">Aggiungi</button>
@@ -99,5 +99,12 @@
             </div>
         </section>
     </main>
+    
+    <script>
+    const contextPath = "${pageContext.request.contextPath}";
+	</script>
+    
+    <script src="${pageContext.request.contextPath}/scripts/validazione.js"></script>
+	<script src="${pageContext.request.contextPath}/scripts/catalogo_ajax.js"></script>
 </body>
 </html>

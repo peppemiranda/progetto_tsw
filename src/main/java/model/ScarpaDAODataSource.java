@@ -38,7 +38,7 @@ public class ScarpaDAODataSource implements ScarpaDAO {
 	
 	@Override
     public Collection<Scarpa> doRetrieveAll() throws SQLException {
-        String query = "SELECT * FROM Scarpa";
+		String query = "SELECT * FROM Scarpa WHERE Cancellata = 0";
         Collection<Scarpa> catalogo = new LinkedList<>();
 
         try (Connection con = ConPool.getConnection();
@@ -103,21 +103,24 @@ public class ScarpaDAODataSource implements ScarpaDAO {
     //Eliminare una scarpa dal catalogo
     @Override
     public void doDelete(int idScarpa) throws SQLException {
-        String query = "DELETE FROM Scarpa WHERE ID_Scarpa = ?";
+    	
+    	String query = "UPDATE Scarpa SET Cancellata = 1 WHERE ID_Scarpa = ?";
 
         try (Connection con = ConPool.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
-            
             ps.setInt(1, idScarpa);
             ps.executeUpdate();
         }
     }
     
     @Override
-    public Collection<Scarpa> doRetrieveByFilter(String marca, String terreno) throws SQLException {
-    	String query = "SELECT * FROM Scarpa WHERE 1=1";
-        if (marca != null && !marca.isEmpty()) query += " AND Marca = ?";
-        if (terreno != null && !terreno.isEmpty()) query += " AND Terreno = ?";
+    public Collection<Scarpa> doRetrieveByFilter(String marca, String terreno, String q) throws SQLException {
+    	
+    	String query = "SELECT * FROM Scarpa WHERE Cancellata = 0";
+        
+        if (marca != null && !marca.isEmpty()) query += " AND FIND_IN_SET(Marca, ?) > 0";
+        if (terreno != null && !terreno.isEmpty()) query += " AND FIND_IN_SET(Terreno, ?) > 0";
+        if (q != null && !q.isEmpty()) query += " AND Modello LIKE ?";
         
         Collection<Scarpa> catalogo = new LinkedList<>();
         try (Connection con = ConPool.getConnection();
@@ -126,6 +129,7 @@ public class ScarpaDAODataSource implements ScarpaDAO {
             int i = 1;
             if (marca != null && !marca.isEmpty()) ps.setString(i++, marca);
             if (terreno != null && !terreno.isEmpty()) ps.setString(i++, terreno);
+            if (q != null && !q.isEmpty()) ps.setString(i++, "%" + q + "%");
             
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {

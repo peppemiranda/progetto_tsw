@@ -26,48 +26,60 @@ public class CatalogoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		model.ScarpaDAODataSource dao = new model.ScarpaDAODataSource();
-	    String azione = request.getParameter("azione");
+        String azione = request.getParameter("azione");
 
-	    try {
-	        if ("filtra".equalsIgnoreCase(azione)) {
-	            // LOGICA AJAX
-	            String marca = request.getParameter("marca");
-	            String terreno = request.getParameter("terreno");
-	            
-	            java.util.Collection<model.Scarpa> catalogo = dao.doRetrieveByFilter(marca, terreno);
-	            
-	            // Costruzione manuale del JSON (o usa una libreria come GSON/org.json)
-	            response.setContentType("application/json");
-	            response.setCharacterEncoding("UTF-8");
-	            java.io.PrintWriter out = response.getWriter();
-	            
-	            StringBuilder json = new StringBuilder("[");
-	            int count = 0;
-	            for (model.Scarpa s : catalogo) {
-	                json.append("{")
-	                    .append("\"idScarpa\":").append(s.getIdScarpa()).append(",")
-	                    .append("\"modello\":\"").append(s.getModello()).append("\",")
-	                    .append("\"prezzoAttuale\":").append(s.getPrezzoAttuale()).append(",")
-	                    .append("\"immagine\":\"").append(s.getImmagine()).append("\"")
-	                    .append("}");
-	                if (++count < catalogo.size()) json.append(",");
-	            }
-	            json.append("]");
-	            
-	            out.print(json.toString());
-	            out.flush();
-	        } else {
-	            // LOGICA CLASSICA (Caricamento pagina)
-	            java.util.Collection<model.Scarpa> catalogo = dao.doRetrieveAll();
-	            request.setAttribute("listaScarpe", catalogo);
-	            jakarta.servlet.RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/common/catalogo.jsp");
-	            dispatcher.forward(request, response);
-	        }
-	    } catch (java.sql.SQLException e) {
-	        e.printStackTrace();
-	        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-	    }
+        try {
+            // SEZIONE 1: COMPORTAMENTO AJAX (Richiesto da catalogo_ajax.js)
+            if ("filtra".equalsIgnoreCase(azione)) {
+                
+                String marca = request.getParameter("marca");
+                String terreno = request.getParameter("terreno");
+                String q = request.getParameter("q"); // Cattura la barra di ricerca
+                
+
+                java.util.Collection<model.Scarpa> catalogo = dao.doRetrieveByFilter(marca, terreno, q);
+                
+                // Preparazione della risposta JSON
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                java.io.PrintWriter out = response.getWriter();
+                
+                // Costruzione manuale della stringa JSON (Array di oggetti)
+                StringBuilder json = new StringBuilder("[");
+                int count = 0;
+                for (model.Scarpa s : catalogo) {
+                    json.append("{")
+                        .append("\"idScarpa\":").append(s.getIdScarpa()).append(",")
+                        // Il replace serve ad evitare problemi se il nome contiene virgolette
+                        .append("\"modello\":\"").append(s.getModello().replace("\"", "\\\"")).append("\",")
+                        .append("\"prezzoAttuale\":").append(s.getPrezzoAttuale()).append(",")
+                        .append("\"immagine\":\"").append(s.getImmagine().replace("\"", "\\\"")).append("\"")
+                        .append("}");
+                    
+                    if (++count < catalogo.size()) {
+                        json.append(",");
+                    }
+                }
+                json.append("]");
+                
+                // Inviamo il JSON e FERMIAMO l'esecuzione (non andiamo alla JSP)
+                out.print(json.toString());
+                out.flush();
+                return; 
+            } 
+            
+            // SEZIONE 2: COMPORTAMENTO CLASSICO (Primo caricamento della pagina)
+            java.util.Collection<model.Scarpa> catalogo = dao.doRetrieveAll();
+            request.setAttribute("listaScarpe", catalogo);
+            jakarta.servlet.RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/common/catalogo.jsp");
+            dispatcher.forward(request, response);
+
+        } catch (java.sql.SQLException e) {
+            e.printStackTrace();
+            request.getRequestDispatcher("/WEB-INF/views/common/errore.jsp").forward(request, response);
+        }
 	}
 
 	/**
