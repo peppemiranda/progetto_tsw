@@ -53,20 +53,20 @@
 
         <aside class="colonna-filtri">
             <h3 class="titolo-filtri">FILTRI RICERCA</h3>
-            <form action="CatalogoServlet" method="GET">
-                <div class="gruppo-filtro">
-                    <h4 class="nome-filtro">Marca</h4>
-                    <label><input type="checkbox" name="marca" value="Nike"> Nike</label><br>
-                    <label><input type="checkbox" name="marca" value="Adidas"> Adidas</label><br>
-                    <label><input type="checkbox" name="marca" value="Puma"> Puma</label>
-                </div>
-                <div class="gruppo-filtro">
-                    <h4 class="nome-filtro">Terreno</h4>
-                    <label><input type="checkbox" name="terreno" value="AG">AG</label><br>
-                    <label><input type="checkbox" name="terreno" value="TF">TF</label>
-                </div>
-                <button type="submit" class="bottone-verde">Applica Filtri</button>
-            </form>
+            <form id="formFiltri">
+    				<div class="gruppo-filtro">
+        		<h4 class="nome-filtro">Marca</h4>
+        <label><input type="checkbox" name="marca" value="Nike" class="filtro-marca"> Nike</label><br>
+        <label><input type="checkbox" name="marca" value="Adidas" class="filtro-marca"> Adidas</label><br>
+        <label><input type="checkbox" name="marca" value="Puma" class="filtro-marca"> Puma</label>
+    </div>
+    <div class="gruppo-filtro">
+        <h4 class="nome-filtro">Terreno</h4>
+        <label><input type="checkbox" name="terreno" value="AG" class="filtro-terreno">AG</label><br>
+        <label><input type="checkbox" name="terreno" value="TF" class="filtro-terreno">TF</label>
+    </div>
+    <button type="button" id="bottoneFiltra" class="bottone-verde">Applica Filtri</button>
+</form>
         </aside>
         
         <section class="sezione-catalogo">
