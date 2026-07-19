@@ -94,7 +94,7 @@ public class ScarpaDAODataSource implements ScarpaDAO {
             ps.setDouble(4, scarpa.getPrezzoAttuale());
             ps.setInt(5, scarpa.getPezziMagazzino());
             ps.setInt(6, scarpa.getIdScarpa());
-            ps.setString(6, scarpa.getImmagine());  //Aggiornamento immagine
+            ps.setString(7, scarpa.getImmagine());  //Aggiornamento immagine
             
             ps.executeUpdate();
         }
@@ -115,18 +115,30 @@ public class ScarpaDAODataSource implements ScarpaDAO {
     
     @Override
     public Collection<Scarpa> doRetrieveByFilter(String marca, String terreno) throws SQLException {
-        String query = "SELECT * FROM Scarpa WHERE 1=1";
-        
-        if (marca != null && !marca.isEmpty()) {
-            query += " AND Marca IN (?)";
-        }
-        if (terreno != null && !terreno.isEmpty()) {
-            query += " AND Terreno = ?";
-        }
+    	String query = "SELECT * FROM Scarpa WHERE 1=1";
+        if (marca != null && !marca.isEmpty()) query += " AND Marca = ?";
+        if (terreno != null && !terreno.isEmpty()) query += " AND Terreno = ?";
         
         Collection<Scarpa> catalogo = new LinkedList<>();
         try (Connection con = ConPool.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
+            
+            int i = 1;
+            if (marca != null && !marca.isEmpty()) ps.setString(i++, marca);
+            if (terreno != null && !terreno.isEmpty()) ps.setString(i++, terreno);
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Scarpa s = new Scarpa();
+                    s.setIdScarpa(rs.getInt("ID_Scarpa"));
+                    s.setMarca(rs.getString("Marca"));
+                    s.setModello(rs.getString("Modello"));
+                    s.setTerreno(rs.getString("Terreno"));
+                    s.setPrezzoAttuale(rs.getDouble("Prezzo_Attuale"));
+                    s.setImmagine(rs.getString("Immagine"));
+                    catalogo.add(s);
+                }
+            }
         }
         return catalogo;
     }
