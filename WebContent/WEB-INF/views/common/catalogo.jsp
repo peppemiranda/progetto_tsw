@@ -15,10 +15,11 @@
                 <a href="CatalogoServlet"><img src="images/logo.png" alt="PianetaCalcio Logo" class="immagine-logo"></a>
             </div>
             <div class="barra-ricerca">
-                <form action="CatalogoServlet" method="GET">
-                    <input type="text" name="q" placeholder="Cerca scarpette..." class="input-ricerca" required>
-                    <button type="submit" class="bottone-verde">Cerca</button>
-                </form>
+            	<form id="formRicerca">
+    	<input type="text" id="inputRicerca" name="q" placeholder="Cerca scarpette..." class="input-ricerca" required>
+    	<button type="button" id="bottoneCerca" class="bottone-verde">Cerca</button>
+			</form>
+			
             </div>
             <div class="carrello-info">
                 <a href="CarrelloServlet" class="link-neutro">
