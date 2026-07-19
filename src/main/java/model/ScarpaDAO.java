@@ -11,6 +11,9 @@ public interface ScarpaDAO {
     // Recupera l'intero catalogo di scarpe (per la griglia prodotti)
     Collection<Scarpa> doRetrieveAll() throws SQLException;
     
+    //Metodo per l'implementazione di Ajax
+    Collection<Scarpa> doRetrieveByFilter(String marca, String terreno) throws SQLException;
+    
     //Metodi per l'admin
     void doSave(Scarpa scarpa) throws SQLException;
     
