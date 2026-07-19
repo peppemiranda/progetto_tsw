@@ -80,11 +80,14 @@
                                     <h4 class="nome-prodotto"><c:out value="${scarpa.modello}" /></h4>
                                     <p class="prezzo-prodotto">€ <c:out value="${scarpa.prezzoAttuale}" /></p>
                                 </a>
-                                <form action="CarrelloServlet" method="POST" style="margin-top: 10px;">
-                                    <input type="hidden" name="azione" value="aggiungi">
-                                    <input type="hidden" name="id" value="${scarpa.idScarpa}">
-                                    <button type="submit" class="bottone-verde">Aggiungi</button>
-                                </form>
+                                
+                             <c:if test="${empty sessionScope.utenteLoggato or sessionScope.utenteLoggato.ruolo != 'Admin'}">
+    	<form action="CarrelloServlet" method="POST" style="margin-top: 10px;">
+        	<input type="hidden" name="azione" value="aggiungi">
+        	<input type="hidden" name="id" value="${scarpa.idScarpa}">
+        	<button type="submit" class="bottone-verde">Aggiungi</button>
+    						</form>
+							</c:if>
                             </article>
                         </c:forEach>
                     </c:when>
