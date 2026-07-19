@@ -31,3 +31,24 @@ function inviaRichiestaAjax(params) {
     xhr.open("GET", "CatalogoServlet?azione=filtra&" + params, true);
     xhr.send();
 }
+
+
+function aggiornaGriglia(scarpe) {
+    const griglia = document.querySelector(".griglia-prodotti");
+    griglia.innerHTML = ""; // Puliamo la griglia[cite: 3]
+    
+    scarpe.forEach(scarpa => {
+        // Creiamo dinamicamente l'HTML per ogni scarpa[cite: 3]
+        const articolo = document.createElement("article");
+        articolo.className = "scheda-prodotto";
+        articolo.innerHTML = `
+            <a href="DettaglioScarpaServlet?id=${scarpa.idScarpa}" class="link-neutro">
+                <img src="images/${scarpa.immagine}" alt="${scarpa.modello}" class="immagine-scarpa">
+                <h4 class="nome-prodotto">${scarpa.modello}</h4>
+                <p class="prezzo-prodotto">€ ${scarpa.prezzoAttuale}</p>
+            </a>
+        `;
+        griglia.appendChild(articolo);
+    });
+}
+
