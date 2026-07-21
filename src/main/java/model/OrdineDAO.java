@@ -14,4 +14,7 @@ public interface OrdineDAO {
     
     // Per leggere i nuovi ordini
     public Collection<Ordine> doRetrieveAll() throws SQLException;
+    
+    // Per far filtrare all'Admin gli ordini per data e per cliente
+    public java.util.Collection<model.Ordine> doRetrieveByFiltri() throws java.sql.SQLException;
 }
