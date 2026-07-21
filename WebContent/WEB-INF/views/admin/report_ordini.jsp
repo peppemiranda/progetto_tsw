@@ -30,6 +30,24 @@
     
     <main class="contenitore-principale">
         <h2 class="titolo-form">Storico Ordini Clienti</h2>
+        
+        	<section class="sezione-form-admin">
+            <form action="AdminServlet" method="GET">
+                <input type="hidden" name="azione" value="reportOrdini">
+                
+                <div class="gruppo-input">
+                    <label for="data">Data Ordine:</label>
+                    <input type="date" id="data" name="data" class="input-testo">
+                </div>
+                
+                <div class="gruppo-input">
+                    <label for="idCliente">ID Cliente:</label>
+                    <input type="number" id="idCliente" name="idCliente" class="input-testo">
+                </div>
+                
+                <button type="submit" class="bottone-verde">Applica Filtri</button>
+            </form>
+        </section>
 
         <section class="sezione-tabella-admin">
             <c:choose>

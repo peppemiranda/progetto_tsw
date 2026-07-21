@@ -58,7 +58,7 @@
                 </div>
                 
                 <div class="gruppo-input">
-                    <label>Prezzo (Usa il punto per i decimali):</label>
+                    <label>Prezzo:</label>
                     <input type="number" step="0.01" name="prezzo" value="${scarpaDaModificare.prezzoAttuale}" required>
                 </div>
                 

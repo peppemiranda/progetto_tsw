@@ -79,5 +79,42 @@ public class OrdineDAODataSource implements OrdineDAO {
         }
         return ordini;
     }
+    
+    public java.util.Collection<model.Ordine> doRetrieveByFiltri(String data, String idCliente) throws java.sql.SQLException {
+    	
+    	String query = "SELECT * FROM Ordine WHERE 1=1";
+        
+        // CORREZIONE: Ora cerchiamo la data esatta (=)
+        if (data != null && !data.trim().isEmpty()) query += " AND Data_Acquisto = ?";
+        if (idCliente != null && !idCliente.trim().isEmpty()) query += " AND ID_Utente = ?";
+
+        java.util.Collection<model.Ordine> ordini = new java.util.LinkedList<>();
+
+        try (java.sql.Connection con = model.ConPool.getConnection();
+             java.sql.PreparedStatement ps = con.prepareStatement(query)) {
+            
+            int i = 1;
+
+            if (data != null && !data.trim().isEmpty()) {
+                ps.setDate(i++, java.sql.Date.valueOf(data));
+            }
+            if (idCliente != null && !idCliente.trim().isEmpty()) {
+                ps.setInt(i++, Integer.parseInt(idCliente));
+            }
+
+            try (java.sql.ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    model.Ordine ordine = new model.Ordine();
+                    ordine.setIdOrdine(rs.getInt("ID_Ordine"));
+                    ordine.setIdUtente(rs.getInt("ID_Utente"));
+                    ordine.setDataAcquisto(rs.getDate("Data_Acquisto"));
+                    ordine.setTotaleOrdine(rs.getDouble("Totale_Ordine"));
+                    
+                    ordini.add(ordine);
+                }
+            }
+        }
+        return ordini;
+    }
 
 }

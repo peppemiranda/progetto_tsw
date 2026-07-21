@@ -399,6 +399,26 @@ body {
 }
 
 
+/* Stili specifici per il form dei filtri ("in report_ordini.jsp") */
+
+.gruppo-input {
+    display: inline-block; 
+    margin-right: 15px;  
+    margin-bottom: 15px;  
+}
+
+.gruppo-input label {
+    font-weight: bold;
+    margin-right: 5px;
+    color: #333;
+}
+
+/* Modifica per il bottone dentro il form filtri */
+.sezione-form-admin .bottone-verde {
+    display: inline-block; 
+    margin-top: 0;   
+}
+
 
 
 

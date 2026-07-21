@@ -30,7 +30,10 @@
                 <c:choose>
                     <c:when test="${not empty sessionScope.utenteLoggato}">
                         <span class="utente-loggato">Benvenuto, <c:out value="${sessionScope.utenteLoggato.nome}" />!</span>
-                        <a href="StoricoOrdiniServlet" class="link-accesso">I Miei Ordini</a>
+
+						<c:if test="${sessionScope.utenteLoggato.ruolo != 'Admin'}">
+    						<a href="StoricoOrdiniServlet" class="link-accesso">I Miei Ordini</a>
+						</c:if>
                         
                         <c:if test="${sessionScope.utenteLoggato.ruolo == 'Admin'}">
                             <a href="AdminServlet" class="link-accesso link-admin">Area Admin</a>

@@ -53,13 +53,13 @@ public class AdminServlet extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/views/admin/gestione_catalogo.jsp").forward(request, response);
                 
             } else if ("reportOrdini".equalsIgnoreCase(azione)) {
-                String dataInizio = request.getParameter("dataInizio");
-                String dataFine = request.getParameter("dataFine");
-                String idClienteStr = request.getParameter("idCliente");
+            	
+                String data = request.getParameter("dataInizio");
+                String idCliente = request.getParameter("idCliente");
 
                 Collection<Ordine> ordini;
                 
-                ordini = ordineDAO.doRetrieveAll(); 
+                ordini = ordineDAO.doRetrieveByFiltri(data, idCliente);
                 
                 request.setAttribute("listaOrdini", ordini);
                 request.getRequestDispatcher("/WEB-INF/views/admin/report_ordini.jsp").forward(request, response);

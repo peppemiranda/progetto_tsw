@@ -81,7 +81,7 @@ public class ScarpaDAODataSource implements ScarpaDAO {
     
     @Override
     public void doUpdate(Scarpa scarpa) throws SQLException {
-        String query = "UPDATE Scarpa SET Marca = ?, Modello = ?, Terreno = ?, Prezzo_Attuale = ?, Pezzi_Magazzino = ?, Immagine = ? WHERE ID_Scarpa = ?";
+    	String query = "UPDATE Scarpa SET Marca = ?, Modello = ?, Terreno = ?, Prezzo_Attuale = ?, Pezzi_Magazzino = ?, Immagine = ? WHERE ID_Scarpa = ?";
 
         try (Connection con = ConPool.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -91,8 +91,8 @@ public class ScarpaDAODataSource implements ScarpaDAO {
             ps.setString(3, scarpa.getTerreno() != null ? scarpa.getTerreno() : "FG");
             ps.setDouble(4, scarpa.getPrezzoAttuale());
             ps.setInt(5, scarpa.getPezziMagazzino());
-            ps.setInt(6, scarpa.getIdScarpa());
-            ps.setString(7, scarpa.getImmagine());
+            ps.setString(6, scarpa.getImmagine());
+            ps.setInt(7, scarpa.getIdScarpa());
             
             ps.executeUpdate();
         }
