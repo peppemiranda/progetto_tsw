@@ -17,15 +17,13 @@ function validateFormElem(formElem, pattern, span, errorMessage) {
     }
 }
 
-// Funzione di utilità per il submit finale
+
 function validaRegistrazione(form) {
     let valid = true;
     
-    // Esempio: valida Nome
     if (!validateFormElem(form.nome, patternNome, document.getElementById("errorNome"), "Solo lettere")) {
         valid = false;
     }
-    // Aggiungi qui gli altri campi (email, password, ecc.)
     
-    return valid; // Se è false, il form non viene inviato
+    return valid;
 }

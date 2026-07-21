@@ -27,31 +27,23 @@ public class CheckoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//Prendiamo la sessione
+		
         jakarta.servlet.http.HttpSession session = request.getSession();
         
-        //Estraiamo l'utente loggato(dalla sessione), per vedere CHI sta comprando
-        //Infatti ci prendiamo "utenteLoggato" dalla Servlet LoginServlet(dovè lì abbiamo fatto session.setAttribute)
         model.UtenteRegistrato utente = (model.UtenteRegistrato) session.getAttribute("utenteLoggato");
         
-        //Se l'utente è null (non ha fatto il login), lo mandiamo alla pagina di login
         if (utente == null) {
             response.sendRedirect("LoginServlet");
-            return; //Ferma l'esecuzione del codice
+            return; //Fermiamo l'esecuzione del codice
         }
         
-        //Estraiamo il carrello dalla sessione
-        //Infatti ci prendiamo "carrello" dalla Servlet CarrelloServlet(dovè lì abbiamo fatto session.setAttribute)
         java.util.ArrayList<model.Scarpa> carrello = (java.util.ArrayList<model.Scarpa>) session.getAttribute("carrello");
         
-        // Se il carrello non esiste o è vuoto, rimandiamo l'utente al catalogo
         if (carrello == null || carrello.isEmpty()) {
             response.sendRedirect("CatalogoServlet");
             return;
         }
         
-        // Se l'utente è loggato e il carrello ha elementi, facciamo un forward
-        // alla JSP protetta in WEB-INF
         request.getRequestDispatcher("/WEB-INF/views/common/checkout.jsp").forward(request, response);
 	}
 

@@ -27,42 +27,34 @@ public class DettaglioScarpaServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// Leggiamo l'ID della scarpa dall'URL
         String idStringa = request.getParameter("id");
         
-        // Controllo di sicurezza: verifichiamo che l'ID esista e non sia vuoto
         if (idStringa != null && !idStringa.isEmpty()) {
         	
         	try {
         		
-                // I parametri HTML viaggiano sempre come testo(String), quindi convertiamo in un Numero Intero(int)
-                // per passarlo a MySQL.
                 int idScarpa = Integer.parseInt(idStringa); 
 
-                // Chiamiamo il DAO per cercare la specifica scarpa
                 model.ScarpaDAODataSource dao = new model.ScarpaDAODataSource();
                 model.Scarpa scarpaTrovata = dao.doRetrieveByKey(idScarpa);
 
                 if (scarpaTrovata != null) {
-                	//Se la scarpa esiste nel database la mettiamo nella request con l'etichetta "scarpaDettaglio"
                     request.setAttribute("scarpa", scarpaTrovata);
 
-                    //Poi la pagina HTML/JSP che mostrerà la foto e il prezzo
                     jakarta.servlet.RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/common/dettaglio_prodotto.jsp");
                     dispatcher.forward(request, response);
                     
                 } else {	//La scarpa NON è presente nel database
               
-                    response.sendRedirect("CatalogoServlet");	//Rimandiamo l'utente al Controller del catalogo
+                    response.sendRedirect("CatalogoServlet");
                 }
 
             } catch (NumberFormatException e) {
             	
-            	//Rimandiamo l'utente al Controller del catalogo
                 response.sendRedirect("CatalogoServlet");
                 
             } catch (java.sql.SQLException e) {
-                e.printStackTrace();	 // Errore di connessione a MySQL
+                e.printStackTrace();
                 request.getRequestDispatcher("/WEB-INF/views/common/errore.jsp").forward(request, response);
             }
             

@@ -12,7 +12,6 @@ public class ComposizioneOrdineDAODataSource implements ComposizioneOrdineDAO {
 	@Override
     public void doSave(ComposizioneOrdine composizione) throws SQLException {
 		
-        // Inserimento nella tabella con la chiave primaria composta
         String query = "INSERT INTO Composizione_Ordine (ID_Ordine, ID_Scarpa, Prezzo_Acquisto, Quantita_Scelta) VALUES (?, ?, ?, ?)";
         
         try (Connection con = ConPool.getConnection();

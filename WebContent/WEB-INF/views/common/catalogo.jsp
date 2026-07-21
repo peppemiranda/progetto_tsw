@@ -31,7 +31,6 @@
                     <c:when test="${not empty sessionScope.utenteLoggato}">
                         <span class="utente-loggato">Benvenuto, <c:out value="${sessionScope.utenteLoggato.nome}" />!</span>
                         
-                        <%-- Se è Admin, mostriamo il tasto Dashboard --%>
                         <c:if test="${sessionScope.utenteLoggato.ruolo == 'Admin'}">
                             <a href="AdminServlet" class="link-accesso link-admin">Area Admin</a>
                         </c:if>
@@ -87,11 +86,13 @@
         	<input type="hidden" name="azione" value="aggiungi">
         	<input type="hidden" name="id" value="${scarpa.idScarpa}">
         	<button type="submit" class="bottone-verde">Aggiungi</button>
-    						</form>
-							</c:if>
-                            </article>
-                        </c:forEach>
+        	
+    				</form>
+					</c:if>
+                    </article>
+                    </c:forEach>
                     </c:when>
+                    
                     <c:otherwise>
                         <p class="messaggio-vuoto">Nessuna scarpetta attualmente disponibile nel catalogo.</p>
                     </c:otherwise>

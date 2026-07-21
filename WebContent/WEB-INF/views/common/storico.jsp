@@ -33,7 +33,6 @@
                     <c:when test="${not empty sessionScope.utenteLoggato}">
                         <span class="utente-loggato">Benvenuto, <c:out value="${sessionScope.utenteLoggato.nome}" />!</span>
                         
-                        <%-- Se è Admin, mostriamo il tasto Dashboard --%>
                         <c:if test="${sessionScope.utenteLoggato.ruolo == 'Admin'}">
                             <a href="AdminServlet" class="link-accesso link-admin">Area Admin</a>
                         </c:if>

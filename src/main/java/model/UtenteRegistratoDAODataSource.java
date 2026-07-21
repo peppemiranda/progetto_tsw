@@ -10,7 +10,6 @@ public class UtenteRegistratoDAODataSource implements UtenteRegistratoDAO {
 	@Override
 	public void doSave(UtenteRegistrato utente) throws SQLException {
 		
-        // Query SQL parametrizzata per evitare SQL Injection
         String query = "INSERT INTO Utente_Registrato (Nome, Cognome, Email, PasswordHash, Ruolo, Indirizzo_Spedizione) VALUES (?, ?, ?, ?, ?, ?)";
         
         try (Connection con = ConPool.getConnection();

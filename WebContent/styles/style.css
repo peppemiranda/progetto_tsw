@@ -12,35 +12,32 @@ body {
 
 
 /* Intestazione "PianetaCalcio" */
-/* classe "intestazione" */
 
 .intestazione {
-    background-color: #2c3e50;  /* Colore grigio scuro del template(colore di sfondo) */
-    padding: 20px;	/* Spazio vuoto tra il contenuto e il bordo dell'elemento */
+    background-color: #2c3e50;  
+    padding: 20px;	
     text-align: center;
-    border-bottom: 5px solid #27ae60; /* Riga verde prato */
+    border-bottom: 5px solid #27ae60; 
 }
 
-/* classe "titolo-sito" */
 .titolo-sito {
     color: #ffffff;
     font-size: 28px;
-    font-weight: bold;	/* Peso del carattere */
-    text-decoration: none;	/* Nessuna decorazione */
+    font-weight: bold;	
+    text-decoration: none;	
 }
 
 
 /* Contenitore principale */
-/* Classe "contenitore-form" */
+
 .contenitore-form {
-    width: 40%; 	/* Larghezza */
-    margin: 50px auto;	 /* Spazio vuoto esterno */
+    width: 40%; 
+    margin: 50px auto;
     background-color: #ffffff;
     padding: 30px;
     border: 1px solid #cccccc;
 }
 
-/* Classe "titolo-form" */
 .titolo-form {
     text-align: center;
     color: #2c3e50;
@@ -49,20 +46,18 @@ body {
 
 
 /* Gestione dei campi di input */
-/* Classe "campo-form" */
+
 .campo-form {
     margin-bottom: 15px;
 }
 
-/* Classe "etichetta-input" */
 .etichetta-input {
-    display: block;		/* L'elemento occupa tutta la larhezza disponibile */
+    display: block;	
     font-weight: bold;
     margin-bottom: 5px;
     color: #333333;
 }
 
-/* Classe "input-testo" */
 .input-testo {
     width: 90%;
     padding: 10px;
@@ -71,56 +66,57 @@ body {
 }
 
 
-/* Bottone d'invio(classe "bottone-verde") */
+/* Bottone d'invio */
 
 .bottone-verde {
-    background-color: #27ae60;  /* Colore di sfondo verde prato */
+    background-color: #27ae60; 
     color: #ffffff;
     padding: 10px 20px;
-    border: none;	/* Niente linea(none) */
+    border: none;
     font-weight: bold;
     font-size: 16px;
-    cursor: pointer;	/* Il cursore del mouse diventa una mano con l'indice puntato */
+    cursor: pointer;
     display: block;
-    margin: 20px auto 0 auto;  /* Messo al centro sotto il form */
+    margin: 20px auto 0 auto; 
 }
 
 
 /*Link alternativi(registrazione) */
-/* Classe "testo-alternativo" */
+
 .testo-alternativo {
     text-align: center;
-    margin-top: 20px;	/* Spazio vuoto esterno in alto */
+    margin-top: 20px;	
     font-size: 14px;
 }
 
 /* Classe "link-verde" */
 .link-verde {
     color: #27ae60;
-    text-decoration: none;	/* Nessuna decorazione */
+    text-decoration: none;
     font-weight: bold;
 }
 
 
 /* Layout Catalogo */ 
+
 .contenitore-principale {
     max-width: 1200px;
     margin: 20px auto;
     padding: 0 15px;
-    overflow: hidden; 	/* Per contenere gli elementi "float" */
+    overflow: hidden; 
 }
 
 .colonna-filtri {
-    float: left; 	/* Spinge la colonna a sinistra */
+    float: left; 	
     width: 22%;
     background-color: #ffffff;
     padding: 15px;
     border: 1px solid #cccccc;
-    box-sizing: border-box;   /* Il padding non tocca la larghezza */
+    box-sizing: border-box; 
 }
 
 .sezione-catalogo {
-    float: right; 	/* Spinge il catalogo a destra */
+    float: right; 	
     width: 75%;
     box-sizing: border-box;
 }
@@ -128,20 +124,21 @@ body {
 
 
 /* Griglia dei prodotti */
+
 .griglia-prodotti {
-    text-align: left; 	/* Allinea le scarpe a sinistra */
+    text-align: left; 	
 }
 
 .scheda-prodotto {
-    display: inline-block; 	/* Mette le schede una accanto all'altra */
-    width: 31%; 	/* Circa 3 schede per riga */
+    display: inline-block; 	
+    width: 31%; 	
     margin: 1%;
     background-color: #ffffff;
     border: 1px solid #cccccc;
     padding: 15px;
     text-align: center;
     box-sizing: border-box;
-    vertical-align: top; 	/* Le allinea tutte in alto */
+    vertical-align: top; 	
 }
 
 .immagine-scarpa {
@@ -153,6 +150,7 @@ body {
 
 
 /* Barra di navigazione e header del catalogo */
+
 .intestazione-sito {
     background-color: #2c3e50;
     padding: 15px 20px;
@@ -160,7 +158,7 @@ body {
 }
 
 .barra-navigazione {
-    overflow: hidden; 	/* Contiene gli elementi flottanti interni */
+    overflow: hidden; 	
 }
 
 .barra-navigazione .logo {
@@ -192,7 +190,9 @@ body {
     margin: 6px;
 }
 
+
 /* Icona del carrello */
+
 .immagine-icona-carrello {
     width: 24px;  
     height: auto;
@@ -215,6 +215,7 @@ body {
 
 
 /* Footer */
+
 .footer-sito {
     background-color: #2c3e50;
     color: #ffffff;
@@ -293,6 +294,7 @@ body {
 	margin-bottom: 30px;
 }
 
+
 /* Tabella Storico Ordini */
 
 .tabella-ordini {
@@ -313,6 +315,7 @@ body {
     text-align: center;
     margin-top: 40px;
 }
+
 .scheda-admin {
     display: inline-block;
     width: 45%;
@@ -323,10 +326,12 @@ body {
     margin: 10px;
     box-sizing: border-box;
 }
+
 .titolo-sezione-admin {
     color: #2c3e50;
     margin-bottom: 15px;
 }
+
 .testo-admin {
     margin-bottom: 20px;
     font-size: 16px;
@@ -334,6 +339,7 @@ body {
 
 
 /* Stili tabella e form Admin */
+
 .sezione-form-admin {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
@@ -395,6 +401,8 @@ body {
 
 
 
+
+
 .link-admin {
     color: #ff9800 !important;
     font-weight: bold;
@@ -416,8 +424,7 @@ body {
 
 
 /* MEDIA QUERIES */
-@media screen and (max-width: 800px) {	/* Se lo schermo è più piccolo di 800px si eseguono le seguenti regole per 
-	"contenitore-form" e "input-testo" (esempio, la larghezza è più ampia suli schermi più piccoli) */
+@media screen and (max-width: 800px) {
 	
     .contenitore-form {
         width: 85%;

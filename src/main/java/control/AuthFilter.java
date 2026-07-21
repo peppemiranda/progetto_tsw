@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-//L'annotazione dice a Tomcat quali pagine specifiche deve "controllare" questo Filtro
 @WebFilter(urlPatterns = {"/CheckoutServlet","/ConfermaOrdineServlet" , "/StoricoOrdiniServlet"})
 public class AuthFilter extends HttpFilter {
 	
@@ -22,20 +21,17 @@ public class AuthFilter extends HttpFilter {
 		
 		boolean loggato;
 		
-		//Recuperiamo la sessione dell'utente(se esiste), se non esiste NON ne crea una nuova
         HttpSession session = request.getSession(false);
         
-        //Verifichiamo se l'utente è regolarmente loggato
         loggato = (session != null && session.getAttribute("utenteLoggato") != null);
         
-        if (loggato) {	//Se l'utente è loggato
+        if (loggato) {
 
-            //Il comando 'chain.doFilter' fa "entrare" l'utente
             chain.doFilter(request, response);
             
         } else {  //Se l'utente NON è loggato
         
-            response.sendRedirect("LoginServlet");	// Lo blocchiamo e lo rispediamo a fare il login
+            response.sendRedirect("LoginServlet");
         }
     }
 }

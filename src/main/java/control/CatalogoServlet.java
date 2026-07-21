@@ -31,7 +31,6 @@ public class CatalogoServlet extends HttpServlet {
         String azione = request.getParameter("azione");
 
         try {
-            // SEZIONE 1: COMPORTAMENTO AJAX (Richiesto da catalogo_ajax.js)
             if ("filtra".equalsIgnoreCase(azione)) {
                 
                 String marca = request.getParameter("marca");
@@ -41,18 +40,16 @@ public class CatalogoServlet extends HttpServlet {
 
                 java.util.Collection<model.Scarpa> catalogo = dao.doRetrieveByFilter(marca, terreno, q);
                 
-                // Preparazione della risposta JSON
+                //Preparazione della risposta JSON
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 java.io.PrintWriter out = response.getWriter();
                 
-                // Costruzione manuale della stringa JSON (Array di oggetti)
                 StringBuilder json = new StringBuilder("[");
                 int count = 0;
                 for (model.Scarpa s : catalogo) {
                     json.append("{")
                         .append("\"idScarpa\":").append(s.getIdScarpa()).append(",")
-                        // Il replace serve ad evitare problemi se il nome contiene virgolette
                         .append("\"modello\":\"").append(s.getModello().replace("\"", "\\\"")).append("\",")
                         .append("\"prezzoAttuale\":").append(s.getPrezzoAttuale()).append(",")
                         .append("\"immagine\":\"").append(s.getImmagine().replace("\"", "\\\"")).append("\"")
@@ -64,13 +61,11 @@ public class CatalogoServlet extends HttpServlet {
                 }
                 json.append("]");
                 
-                // Inviamo il JSON e FERMIAMO l'esecuzione (non andiamo alla JSP)
                 out.print(json.toString());
                 out.flush();
                 return; 
             } 
             
-            // SEZIONE 2: COMPORTAMENTO CLASSICO (Primo caricamento della pagina)
             java.util.Collection<model.Scarpa> catalogo = dao.doRetrieveAll();
             request.setAttribute("listaScarpe", catalogo);
             jakarta.servlet.RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/common/catalogo.jsp");

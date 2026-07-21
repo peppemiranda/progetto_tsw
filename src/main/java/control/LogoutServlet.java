@@ -27,16 +27,13 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// Recuperiamo la sessione attuale dell'utente(se esiste). Se non esiste NON si crea nulla (false)
         jakarta.servlet.http.HttpSession session = request.getSession(false);
         
         if (session != null) {
         	
-        	//Questo comando chiude la sessione
             session.invalidate();
         }
         
-        //Rispediamo l'utente al Controller del catalogo(home)
         response.sendRedirect("CatalogoServlet");
 	}
 

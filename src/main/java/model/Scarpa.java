@@ -9,11 +9,11 @@ public class Scarpa {
     private int pezziMagazzino;
     private String immagine;
     
-    //Costruttore vuoto
+    
     public Scarpa() {
     }
 
-    //Costruttore con parametri
+
     public Scarpa(int idScarpa, String marca, String modello, String terreno, 
                   double prezzoAttuale, int pezziMagazzino, String immagine) {
         this.idScarpa = idScarpa;

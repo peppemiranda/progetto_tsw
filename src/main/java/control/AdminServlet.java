@@ -41,11 +41,9 @@ public class AdminServlet extends HttpServlet {
         try {
             if ("gestioneCatalogo".equalsIgnoreCase(azione)) {
             	
-                //Recuperiamo tutte le scarpe per mostrarle nella tabella di gestione
                 Collection<Scarpa> catalogo = scarpaDAO.doRetrieveAll();
                 request.setAttribute("listaScarpe", catalogo);
                 
-                //Se stiamo modificando una scarpa, carichiamo i suoi dati correnti nel form
                 String idModifica = request.getParameter("idModifica");
                 if (idModifica != null && !idModifica.isEmpty()) {
                     Scarpa scarpaDaModificare = scarpaDAO.doRetrieveByKey(Integer.parseInt(idModifica));
@@ -55,14 +53,12 @@ public class AdminServlet extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/views/admin/gestione_catalogo.jsp").forward(request, response);
                 
             } else if ("reportOrdini".equalsIgnoreCase(azione)) {
-                //Per visualizzare gli ordini complessivi, dalla data x alla data y, e per cliente
                 String dataInizio = request.getParameter("dataInizio");
                 String dataFine = request.getParameter("dataFine");
                 String idClienteStr = request.getParameter("idCliente");
 
                 Collection<Ordine> ordini;
                 
-                //Qui facciamo una retrieve totale dei report; se i filtri non sono impostati, mostriamo tutto
                 ordini = ordineDAO.doRetrieveAll(); 
                 
                 request.setAttribute("listaOrdini", ordini);
@@ -70,7 +66,6 @@ public class AdminServlet extends HttpServlet {
                 
             } else {
             	
-                //Di default, se non c'è azione o l'azione è sconosciuta, mostriamo la dashboard principale
                 request.getRequestDispatcher("/WEB-INF/views/admin/dashboard.jsp").forward(request, response);
             }
         } catch (SQLException | NumberFormatException e) {
@@ -90,7 +85,6 @@ public class AdminServlet extends HttpServlet {
         try {
             if ("aggiungi".equalsIgnoreCase(operazione)) {
                 Scarpa nuova = new Scarpa();
-                // CORREZIONE: usiamo solo e soltanto i metodi presenti in Scarpa.java
                 nuova.setMarca(request.getParameter("marca"));
                 nuova.setModello(request.getParameter("modello"));
                 nuova.setTerreno(request.getParameter("terreno"));
@@ -106,7 +100,6 @@ public class AdminServlet extends HttpServlet {
                 Scarpa esistente = scarpaDAO.doRetrieveByKey(id);
                 
                 if (esistente != null) {
-                    // CORREZIONE: allineato a Scarpa.java
                     esistente.setMarca(request.getParameter("marca"));
                     esistente.setModello(request.getParameter("modello"));
                     esistente.setTerreno(request.getParameter("terreno"));

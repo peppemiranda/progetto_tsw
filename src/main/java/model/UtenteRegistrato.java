@@ -11,12 +11,13 @@ public class UtenteRegistrato {
     private String indirizzoSpedizione;
 
 
-// Costruttore vuoto 
-public UtenteRegistrato() {
-}
 
-// Costruttore con parametri
-public UtenteRegistrato(int idUtente, String nome, String cognome, String email, String passwordHash, String ruolo, String indirizzoSpedizione) {
+    public UtenteRegistrato() {
+    }
+
+
+	public UtenteRegistrato(int idUtente, String nome, String cognome, String email, String passwordHash, String ruolo, 
+			String indirizzoSpedizione) {
     this.idUtente = idUtente;
     this.nome = nome;
     this.cognome = cognome;
@@ -24,10 +25,10 @@ public UtenteRegistrato(int idUtente, String nome, String cognome, String email,
     this.passwordHash = passwordHash;
     this.ruolo = ruolo;
     this.indirizzoSpedizione = indirizzoSpedizione;
- 	}
+ 		}
 
 
-//Metodi get e set
+	//Metodi get e set
 
 	public int getIdUtente() {
 		return idUtente;

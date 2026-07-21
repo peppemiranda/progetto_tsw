@@ -36,7 +36,6 @@ public class ConfermaOrdineServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//Impediamo l'accesso diretto via GET
         response.sendRedirect("CatalogoServlet");
 	}
 
@@ -47,26 +46,22 @@ public class ConfermaOrdineServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
         
-        //Verifichiamo che l'utente sia loggato
         UtenteRegistrato utente = (UtenteRegistrato) session.getAttribute("utenteLoggato");
         if (utente == null) {
             response.sendRedirect("LoginServlet");
             return;
         }
         
-        //Verifichiamo che il carrello non sia vuoto
         ArrayList<Scarpa> carrello = (ArrayList<Scarpa>) session.getAttribute("carrello");
         if (carrello == null || carrello.isEmpty()) {
             response.sendRedirect("CatalogoServlet");
             return;
         }
         
-        //Ci prendiamo i parametri inseriti dall'utente nel form di checkout
         String indirizzo = request.getParameter("indirizzo");
         String citta = request.getParameter("citta");
         String carta = request.getParameter("carta");
         
-        //Validazione di sicurezza lato server: se i campi obbligatori sono vuoti rimandiamo l'utente indietro
         if (indirizzo == null || indirizzo.trim().isEmpty() ||
             citta == null || citta.trim().isEmpty() ||
             carta == null || carta.trim().isEmpty()) {
@@ -75,42 +70,35 @@ public class ConfermaOrdineServlet extends HttpServlet {
         }
         
         try {
-            //Calcoliamo il totale dell'ordine scorrendo le scarpe nel carrello
             double totale = 0;
             for (Scarpa scarpa : carrello) {
                 totale += scarpa.getPrezzoAttuale();
             }
             
-            //Creiamo l'oggetto Ordine
             Ordine nuovoOrdine = new Ordine();
-            nuovoOrdine.setIdUtente(utente.getIdUtente()); // Colleghiamo l'ordine al cliente registrato
+            nuovoOrdine.setIdUtente(utente.getIdUtente()); 
             nuovoOrdine.setTotaleOrdine(totale);
             
-            //Chiamiamo il DAO e salviamo l'ordine
             OrdineDAODataSource ordineDao = new OrdineDAODataSource();
             ordineDao.doSave(nuovoOrdine); 
 
-            //Salviamo le singole righe dell'ordine con Composizione_Ordine
             ComposizioneOrdineDAODataSource compDao = new ComposizioneOrdineDAODataSource();
             for (Scarpa scarpa : carrello) {
                 ComposizioneOrdine dettaglio = new ComposizioneOrdine();
-                dettaglio.setIdOrdine(nuovoOrdine.getIdOrdine()); //ID recuperato dopo l'inserimento
+                dettaglio.setIdOrdine(nuovoOrdine.getIdOrdine()); 
                 dettaglio.setIdScarpa(scarpa.getIdScarpa());
                 dettaglio.setPrezzoAcquisto(scarpa.getPrezzoAttuale());
-                dettaglio.setQuantitaScelta(1); 	//Manteniamo 1 quantita fissa
+                dettaglio.setQuantitaScelta(1); 	
                 
-                compDao.doSave(dettaglio);	//Salviamo il tutto
+                compDao.doSave(dettaglio);	
             }
             
-            //Appena l'utente completa l'acquisto svuotiamo il carrello
             carrello.clear();
             
-            //Rimandiamo l'utente Controller del catalogo
             response.sendRedirect("CatalogoServlet?acquisto=successo");
 
         } catch (java.sql.SQLException e) {
             e.printStackTrace();
-            //Errore SQL: facciamo un forward alla pagina di errore (protetta in WEB-INF)
             request.getRequestDispatcher("/WEB-INF/views/common/errore.jsp").forward(request, response);
         }
                    

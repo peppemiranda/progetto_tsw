@@ -28,33 +28,26 @@ public class StoricoOrdiniServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//Prendiamo la sessione dell'utente
         jakarta.servlet.http.HttpSession session = request.getSession();
         model.UtenteRegistrato utente = (model.UtenteRegistrato) session.getAttribute("utenteLoggato");
         
-        //Se l'utente NON è loggato, lo rispediamo al Controller di login
         if (utente == null) {
             response.sendRedirect("LoginServlet");
             return;  //Fermiamo l'esecuzione
         }
 
-        //Chiamiamo il DAO per gli Ordini
         model.OrdineDAODataSource dao = new model.OrdineDAODataSource();
         
         try {
-            // Passiamo l'ID dell'utente al metodo 'doRetrieveByUtente', poi MySQL filtra i dati
-            // restituendo SOLO i dati di quell'utente
             java.util.Collection<model.Ordine> mieiOrdini = dao.doRetrieveByUtente(utente.getIdUtente());
 
-            //Mettiamo la lista nella request con l'etichetta "listaOrdini"
             request.setAttribute("listaOrdini", mieiOrdini);
 
-            //mandiamo l'utente allo storico
             jakarta.servlet.RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/common/storico.jsp");
             dispatcher.forward(request, response);
 
         } catch (java.sql.SQLException e) {
-            e.printStackTrace(); // Se MySQL da "problemi", stampiamo l'errore in console
+            e.printStackTrace(); 
             request.getRequestDispatcher("/WEB-INF/views/common/errore.jsp").forward(request, response);
         }
 	}

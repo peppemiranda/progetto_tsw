@@ -1,6 +1,6 @@
 package model;
 
-import java.sql.Date; //Importazione per far dialogare Java e MySQL sulle date
+import java.sql.Date; 
 
 public class Ordine {
 
@@ -9,11 +9,10 @@ public class Ordine {
     private Date dataAcquisto;
     private double totaleOrdine;
     
-    // Costruttore vuoto
+
     public Ordine() {
     }
 
-    //Costruttore con parametri
     public Ordine(int idOrdine, int idUtente, Date dataAcquisto, double totaleOrdine) {
         this.idOrdine = idOrdine;
         this.idUtente = idUtente;

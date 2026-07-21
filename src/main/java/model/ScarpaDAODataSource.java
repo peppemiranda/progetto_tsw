@@ -28,7 +28,7 @@ public class ScarpaDAODataSource implements ScarpaDAO {
                     scarpa.setTerreno(rs.getString("Terreno"));
                     scarpa.setPrezzoAttuale(rs.getDouble("Prezzo_Attuale"));
                     scarpa.setPezziMagazzino(rs.getInt("Pezzi_Magazzino"));
-                    scarpa.setImmagine(rs.getString("Immagine"));  //Lettura immagine
+                    scarpa.setImmagine(rs.getString("Immagine"));
                 }
             }
         }
@@ -53,15 +53,14 @@ public class ScarpaDAODataSource implements ScarpaDAO {
                 scarpa.setTerreno(rs.getString("Terreno"));
                 scarpa.setPrezzoAttuale(rs.getDouble("Prezzo_Attuale"));
                 scarpa.setPezziMagazzino(rs.getInt("Pezzi_Magazzino"));
-                scarpa.setImmagine(rs.getString("Immagine"));  //Lettura immagine
+                scarpa.setImmagine(rs.getString("Immagine"));
                 
-                catalogo.add(scarpa); // Aggiunge la scarpa alla lista del catalogo
+                catalogo.add(scarpa); 
             }
         }
         return catalogo;
     }
 	
-	//Salvare una nuova scarpa
     @Override
     public void doSave(Scarpa scarpa) throws SQLException {
         String query = "INSERT INTO Scarpa (Marca, Modello, Terreno, Prezzo_Attuale, Pezzi_Magazzino, Immagine) VALUES (?, ?, ?, ?, ?, ?)";
@@ -71,16 +70,15 @@ public class ScarpaDAODataSource implements ScarpaDAO {
             
             ps.setString(1, scarpa.getMarca());
             ps.setString(2, scarpa.getModello());
-            ps.setString(3, scarpa.getTerreno() != null ? scarpa.getTerreno() : "FG"); // allback a FG se nullo
+            ps.setString(3, scarpa.getTerreno() != null ? scarpa.getTerreno() : "FG"); 
             ps.setDouble(4, scarpa.getPrezzoAttuale());
-            ps.setInt(5, scarpa.getPezziMagazzino() > 0 ? scarpa.getPezziMagazzino() : 10); //Default 10 pezzi se non specificato
-            ps.setString(6, scarpa.getImmagine());  //Salvataggio immagine
+            ps.setInt(5, scarpa.getPezziMagazzino() > 0 ? scarpa.getPezziMagazzino() : 10);
+            ps.setString(6, scarpa.getImmagine()); 
             
             ps.executeUpdate();
         }
     }
     
-    //Aggiornare i dati di una scarpa già esistente
     @Override
     public void doUpdate(Scarpa scarpa) throws SQLException {
         String query = "UPDATE Scarpa SET Marca = ?, Modello = ?, Terreno = ?, Prezzo_Attuale = ?, Pezzi_Magazzino = ?, Immagine = ? WHERE ID_Scarpa = ?";
@@ -94,13 +92,13 @@ public class ScarpaDAODataSource implements ScarpaDAO {
             ps.setDouble(4, scarpa.getPrezzoAttuale());
             ps.setInt(5, scarpa.getPezziMagazzino());
             ps.setInt(6, scarpa.getIdScarpa());
-            ps.setString(7, scarpa.getImmagine());  //Aggiornamento immagine
+            ps.setString(7, scarpa.getImmagine());
             
             ps.executeUpdate();
         }
     }
     
-    //Eliminare una scarpa dal catalogo
+
     @Override
     public void doDelete(int idScarpa) throws SQLException {
     	

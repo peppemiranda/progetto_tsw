@@ -27,19 +27,15 @@ public class CarrelloServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//Recuperiamo la Sessione dell'utente. Se la sessione esiste ci viene restituita, altrimenti se ne crea una nuova
         jakarta.servlet.http.HttpSession session = request.getSession();
         
-        //Cerchiamo il carrello nella sessione.
-        // Usiamo una ArrayList di Java per contenere le scarpe scelte
         
         java.util.ArrayList<model.Scarpa> carrello = (java.util.ArrayList<model.Scarpa>) session.getAttribute("carrello");
         if (carrello == null) {
             carrello = new java.util.ArrayList<>();
-            session.setAttribute("carrello", carrello); 	//Lo appiccichiamo alla sessione
+            session.setAttribute("carrello", carrello); 
         }
         
-        //Forward alla pagina del carrello protetta
         request.getRequestDispatcher("/WEB-INF/views/common/carrello.jsp").forward(request, response);
 	}
 
@@ -47,10 +43,9 @@ public class CarrelloServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	
-	//Metodo doPost che lo usiamo per modificare i dati del carrello(aggiungere, rimuovere, svuotare)
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-jakarta.servlet.http.HttpSession session = request.getSession();
+		jakarta.servlet.http.HttpSession session = request.getSession();
         
         java.util.ArrayList<model.Scarpa> carrello = (java.util.ArrayList<model.Scarpa>) session.getAttribute("carrello");
         if (carrello == null) {
@@ -85,14 +80,11 @@ jakarta.servlet.http.HttpSession session = request.getSession();
                 }
             } catch (NumberFormatException | java.sql.SQLException e) {
                 e.printStackTrace();
-                // In caso di errore SQL mandiamo alla pagina di errore per sicurezza
                 request.getRequestDispatcher("/WEB-INF/views/common/errore.jsp").forward(request, response);
                 return;
             }
         }
         
-        // Dopo aver modificato i dati(nel metodo doPost), facciamo un redirect verso la stessa Servlet per evitare che
-        // ricaricando la pagina l'utente compri due volte lo stesso prodotto
         response.sendRedirect("CarrelloServlet");
 	}
 

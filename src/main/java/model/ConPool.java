@@ -8,8 +8,6 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 
-//Questa è una classe che legge il nostro file context.xml e ci restituisce la connessione ogni volta che un DAO la richiede
-
 public class ConPool {
 	
     private static DataSource datasource;
@@ -20,12 +18,12 @@ public class ConPool {
                 Context initCtx = new InitialContext();
                 Context envCtx = (Context) initCtx.lookup("java:comp/env");
                 
-                datasource = (DataSource) envCtx.lookup("jdbc/PianetaCalcioDB");  // Questo nome DEVE essere identico al "name" nel file context.xml
+                datasource = (DataSource) envCtx.lookup("jdbc/PianetaCalcioDB"); 
                 
             } catch (NamingException e) {
                 throw new SQLException("Errore fatale: impossibile caricare il Connection Pool dal context.xml", e);
             }
         }
-        return datasource.getConnection();		//Restituiamo fisicamente la connessione aperta
+        return datasource.getConnection();	
     }
 }
