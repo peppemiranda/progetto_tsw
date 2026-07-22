@@ -89,19 +89,36 @@ public class ConfermaOrdineServlet extends HttpServlet {
             ComposizioneOrdineDAODataSource compDao = new ComposizioneOrdineDAODataSource();
 
             model.ScarpaDAODataSource scarpaDao = new model.ScarpaDAODataSource();
+            
+            java.util.Map<Integer, ComposizioneOrdine> dettagliDaSalvare = new java.util.HashMap<>();
 
             for (Scarpa scarpa : carrello) {
-                ComposizioneOrdine dettaglio = new ComposizioneOrdine();
-                dettaglio.setIdOrdine(nuovoOrdine.getIdOrdine()); 
-                dettaglio.setIdScarpa(scarpa.getIdScarpa());
-                dettaglio.setPrezzoAcquisto(scarpa.getPrezzoAttuale());
-                dettaglio.setQuantitaScelta(1); 	
+                int idS = scarpa.getIdScarpa();
                 
-                compDao.doSave(dettaglio);	
+                if (dettagliDaSalvare.containsKey(idS)) {
+                    ComposizioneOrdine dettEsistente = dettagliDaSalvare.get(idS);
+                    dettEsistente.setQuantitaScelta(dettEsistente.getQuantitaScelta() + 1);
+                } else {
+                    ComposizioneOrdine nuovoDettaglio = new ComposizioneOrdine();
+                    nuovoDettaglio.setIdOrdine(nuovoOrdine.getIdOrdine()); 
+                    nuovoDettaglio.setIdScarpa(idS);
+                    nuovoDettaglio.setPrezzoAcquisto(scarpa.getPrezzoAttuale());
+                    nuovoDettaglio.setQuantitaScelta(1); 
+                    
+                    dettagliDaSalvare.put(idS, nuovoDettaglio);
+                }
+            }
+
+            for (ComposizioneOrdine dettaglio : dettagliDaSalvare.values()) {
+                compDao.doSave(dettaglio);  
                 
-                Scarpa scarpaDalDB = scarpaDao.doRetrieveByKey(scarpa.getIdScarpa());
+                Scarpa scarpaDalDB = scarpaDao.doRetrieveByKey(dettaglio.getIdScarpa());
                 if (scarpaDalDB != null && scarpaDalDB.getPezziMagazzino() > 0) {
-                    scarpaDalDB.setPezziMagazzino(scarpaDalDB.getPezziMagazzino() - 1);
+                    int nuovaQuantita = scarpaDalDB.getPezziMagazzino() - dettaglio.getQuantitaScelta();
+                    if (nuovaQuantita < 0) {
+                        nuovaQuantita = 0;
+                    }
+                    scarpaDalDB.setPezziMagazzino(nuovaQuantita);
                     scarpaDao.doUpdate(scarpaDalDB); 
                 }
             }
