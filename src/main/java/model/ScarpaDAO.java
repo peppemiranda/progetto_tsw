@@ -14,9 +14,6 @@ public interface ScarpaDAO {
     //Metodo per l'implementazione di Ajax
     Collection<Scarpa> doRetrieveByFilter(String marca, String terreno, String q) throws SQLException;
     
-    //Riduce i pezzi in magazzino dopo un acquisto
-    void aggiornaStock(int idScarpa, int quantitaAcquistata) throws java.sql.SQLException;
-    
     //Metodi per l'admin
     void doSave(Scarpa scarpa) throws SQLException;
     
