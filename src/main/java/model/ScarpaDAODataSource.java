@@ -144,5 +144,21 @@ public class ScarpaDAODataSource implements ScarpaDAO {
         }
         return catalogo;
     }
+    
+    
+    @Override
+    public void aggiornaStock(int idScarpa, int quantitaAcquistata) throws SQLException {
+    	
+        String query = "UPDATE Scarpa SET Pezzi_Magazzino = Pezzi_Magazzino - ? WHERE ID_Scarpa = ?";
+
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+            
+            ps.setInt(1, quantitaAcquistata);
+            ps.setInt(2, idScarpa);
+            
+            ps.executeUpdate();
+        }
+    }
 
 }
