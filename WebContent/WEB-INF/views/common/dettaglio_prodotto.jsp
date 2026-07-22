@@ -24,14 +24,24 @@
             <h1><c:out value="${scarpa.modello}" /></h1>
             <p>Marca: <c:out value="${scarpa.marca}" /></p>
 			<p>Prezzo: € <c:out value="${scarpa.prezzoAttuale}" /></p>
-
-				<c:if test="${empty sessionScope.utenteLoggato or sessionScope.utenteLoggato.ruolo != 'Admin'}">
-    <form action="CarrelloServlet" method="POST">
-        <input type="hidden" name="azione" value="aggiungi">
-        <input type="hidden" name="id" value="${scarpa.idScarpa}">
-        <button type="submit" class="bottone-verde">Aggiungi al Carrello</button>
-    </form>
-			</c:if>
+			
+			
+            <c:choose>
+                <c:when test="${scarpa.pezziMagazzino > 0}">
+                    
+                    <c:if test="${empty sessionScope.utenteLoggato or sessionScope.utenteLoggato.ruolo != 'Admin'}">
+                        <form action="CarrelloServlet" method="POST">
+                            <input type="hidden" name="azione" value="aggiungi">
+                            <input type="hidden" name="id" value="${scarpa.idScarpa}">
+                            <button type="submit" class="bottone-verde">Aggiungi al Carrello</button>
+                        </form>
+                    </c:if>
+                    
+                </c:when>
+                <c:otherwise>
+                    <p class="messaggio-errore">Prodotto attualmente Esaurito</p>
+                </c:otherwise>
+            </c:choose>
 
 	</article>
     </main>

@@ -85,8 +85,11 @@ public class ConfermaOrdineServlet extends HttpServlet {
             
             OrdineDAODataSource ordineDao = new OrdineDAODataSource();
             ordineDao.doSave(nuovoOrdine); 
-
+            
             ComposizioneOrdineDAODataSource compDao = new ComposizioneOrdineDAODataSource();
+
+            model.ScarpaDAODataSource scarpaDao = new model.ScarpaDAODataSource();
+
             for (Scarpa scarpa : carrello) {
                 ComposizioneOrdine dettaglio = new ComposizioneOrdine();
                 dettaglio.setIdOrdine(nuovoOrdine.getIdOrdine()); 
@@ -95,6 +98,12 @@ public class ConfermaOrdineServlet extends HttpServlet {
                 dettaglio.setQuantitaScelta(1); 	
                 
                 compDao.doSave(dettaglio);	
+                
+                Scarpa scarpaDalDB = scarpaDao.doRetrieveByKey(scarpa.getIdScarpa());
+                if (scarpaDalDB != null && scarpaDalDB.getPezziMagazzino() > 0) {
+                    scarpaDalDB.setPezziMagazzino(scarpaDalDB.getPezziMagazzino() - 1);
+                    scarpaDao.doUpdate(scarpaDalDB); 
+                }
             }
             
             carrello.clear();
