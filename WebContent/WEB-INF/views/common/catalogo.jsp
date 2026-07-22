@@ -22,10 +22,13 @@
 			
             </div>
             <div class="carrello-info">
+            
+            	<c:if test="${empty sessionScope.utenteLoggato or sessionScope.utenteLoggato.ruolo != 'Admin'}">
                 <a href="CarrelloServlet" class="link-neutro">
                     <img src="images/carrello.png" alt="Carrello" class="immagine-icona-carrello"> 
                     Cart: <c:out value="${not empty sessionScope.carrello ? sessionScope.carrello.size() : 0}" />
                 </a>
+                </c:if>
 
                 <c:choose>
                     <c:when test="${not empty sessionScope.utenteLoggato}">
