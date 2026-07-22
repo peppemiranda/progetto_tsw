@@ -42,9 +42,17 @@ public class RegistrazioneServlet extends HttpServlet {
         String passwordInChiaro = request.getParameter("password");
         String indirizzo = request.getParameter("indirizzo");
         
-        
+        if (nome == null || !nome.matches("^[A-Za-z\\s]+$") ||
+                cognome == null || !cognome.matches("^[A-Za-z\\s]+$") ||
+                email == null || !email.matches("^\\S+@\\S+\\.\\S+$") ||
+                passwordInChiaro == null || passwordInChiaro.length() < 8 ||
+                indirizzo == null || indirizzo.trim().isEmpty()) {
+                
+                response.sendRedirect("RegistrazioneServlet?errore=dati_non_validi");
+                return;
+            }
+                
         String passwordHash = util.PasswordHasher.hashPassword(passwordInChiaro);
-        
         
         
         model.UtenteRegistrato nuovoUtente = new model.UtenteRegistrato();

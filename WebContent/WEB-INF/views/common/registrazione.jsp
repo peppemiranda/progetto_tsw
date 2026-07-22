@@ -21,7 +21,7 @@
             <p class="messaggio-errore">Questa email è già registrata. Usa un'altra email o accedi.</p>
         </c:if>
         
-        <form action="RegistrazioneServlet" method="POST">
+        <form action="RegistrazioneServlet" method="POST" onsubmit="return validaRegistrazione(this);">
             <div class="campo-form">
                 <label for="nome" class="etichetta-input">Nome:</label>
                 <input type="text" id="nome" name="nome" class="input-testo" required>

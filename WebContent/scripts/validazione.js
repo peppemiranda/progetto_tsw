@@ -1,9 +1,11 @@
 
-const patternNome = /^[A-Za-z]+$/;
+const patternNomeCognome = /^[A-Za-z\s]+$/;
 const patternEmail = /^\S+@\S+\.\S+$/;
-const patternTelefono = /^([0-9]{3}-[0-9]{7})$/;
 
-function validateFormElem(formElem, pattern, span, errorMessage) {
+
+function validateFormElem(formElem, pattern, spanId, errorMessage) {
+	
+    let span = document.getElementById(spanId);
     if (formElem.value.match(pattern)) {
         formElem.classList.remove("error");
         span.style.color = "black";
@@ -19,11 +21,23 @@ function validateFormElem(formElem, pattern, span, errorMessage) {
 
 
 function validaRegistrazione(form) {
+	
     let valid = true;
     
-    if (!validateFormElem(form.nome, patternNome, document.getElementById("errorNome"), "Solo lettere")) {
+    if (!validateFormElem(form.nome, patternNomeCognome, "errorNome", "Inserisci solo lettere")) valid = false;
+    if (!validateFormElem(form.cognome, patternNomeCognome, "errorCognome", "Inserisci solo lettere")) valid = false;
+    if (!validateFormElem(form.email, patternEmail, "errorEmail", "Formato email non valido (manca @ o punto)")) valid = false;
+    
+    let spanPwd = document.getElementById("errorPassword");
+    if (form.password.value.length < 8) {
+        form.password.classList.add("error");
+        spanPwd.innerHTML = "La password deve essere lunga almeno 8 caratteri";
+        spanPwd.style.color = "red";
         valid = false;
+    } else {
+        form.password.classList.remove("error");
+        spanPwd.innerHTML = "";
     }
     
-    return valid;
+    return valid; 	//Se è false, il form NON viene inviato alla Servlet
 }
